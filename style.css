@@ -1030,3 +1030,129 @@ tbody tr:focus-within {
 @media (prefers-reduced-motion: reduce) {
   .nav-item:hover, .stat-card:hover { transform: none; }
 }
+
+
+/* V12 — focused premium finish; CSS-only, no application logic changes */
+:root {
+  --shadow-card: 0 4px 16px rgb(19 22 30 / 4%), 0 1px 3px rgb(19 22 30 / 3%);
+  --shadow-raised: 0 14px 34px rgb(19 22 30 / 9%);
+}
+.brand-stage {
+  box-shadow: 0 16px 38px rgb(17 18 22 / 12%);
+}
+.brand-stage-tags {
+  gap: 8px;
+  align-items: center;
+}
+.brand-stage-tags span {
+  min-height: 30px;
+  padding: 6px 10px;
+  border: 1px solid rgb(255 255 255 / 11%);
+  border-radius: 7px;
+  background: rgb(255 255 255 / 4%);
+  color: #b5b5bd;
+  font-size: 8px;
+  letter-spacing: .55px;
+  transition: background-color .18s ease, border-color .18s ease;
+}
+.brand-stage-tags b {
+  color: #f1f1f4;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .65px;
+}
+.section-note {
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  line-height: 1.4;
+}
+.section-note .online-dot {
+  box-shadow: 0 0 0 3px rgb(34 163 101 / 10%);
+}
+.analytics-card, .panel {
+  box-shadow: var(--shadow-card);
+}
+.panel {
+  overflow: hidden;
+}
+.button-small {
+  min-width: 48px;
+  min-height: 40px;
+  padding: 8px 10px;
+}
+.button-primary:focus-visible, .button-secondary:focus-visible,
+.button-small:focus-visible, .theme-toggle:focus-visible,
+.nav-item:focus-visible, .brand:focus-visible, .add-shortcut:focus-visible {
+  outline: 3px solid rgb(217 4 41 / 48%);
+  outline-offset: 3px;
+}
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 12px;
+  left: 12px;
+  padding: 11px 15px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 9px;
+  color: #fff;
+  background: #b90026;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 22%);
+  font-size: 12px;
+  font-weight: 700;
+  transform: translateY(-160%);
+  transition: transform .16s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+:root[data-theme="dark"] .section-note {
+  background: var(--surface);
+}
+:root[data-theme="dark"] .brand-stage-tags span {
+  border-color: rgb(255 255 255 / 13%);
+  background: rgb(255 255 255 / 5%);
+}
+@media (max-width: 1100px) {
+  .brand-stage-tags { gap: 7px; }
+  .brand-stage-tags span { padding-inline: 8px; }
+}
+@media (max-width: 720px) {
+  .brand-stage { margin-bottom: 24px; }
+  .brand-stage-copy { padding-bottom: 24px; }
+  .brand-stage-tags {
+    position: relative;
+    z-index: 3;
+    max-width: 100%;
+    gap: 6px;
+  }
+  .brand-stage-tags span {
+    min-height: 28px;
+    padding: 5px 7px;
+    font-size: 7px;
+  }
+  .brand-stage-tags b { font-size: 7px; }
+  .section-note {
+    min-height: 30px;
+    max-width: 100%;
+    white-space: normal;
+  }
+  .button-small { min-height: 40px; }
+  .search-box { min-height: 40px; }
+  .filter-select { min-height: 40px; }
+  .filter-select select { min-height: 36px; }
+  .table-wrap { border-radius: 0 0 10px 10px; }
+  .panel-footer { line-height: 1.6; }
+}
+@media (max-width: 390px) {
+  .brand-stage-tags { gap: 5px; }
+  .brand-stage-tags span { padding-inline: 6px; }
+  .brand-stage-tags span, .brand-stage-tags b { font-size: 6.5px; }
+  .section-note { font-size: 9px; }
+  .button-small { min-width: 44px; padding-inline: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skip-link { transition: none; }
+}
