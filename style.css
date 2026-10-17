@@ -903,3 +903,130 @@ tbody tr { transition: background-color .14s ease; }
   .topbar-actions > .profile { padding-inline: 7px; }
   .theme-toggle { gap: 6px; font-size: 9px; }
 }
+
+
+/* V11 — premium UI finish; presentation only, preserves application logic */
+:root {
+  --shadow-card: 0 3px 12px rgb(23 31 56 / 4%), 0 1px 3px rgb(23 31 56 / 3%);
+  --shadow-raised: 0 12px 30px rgb(23 31 56 / 9%);
+}
+body {
+  background-image: radial-gradient(ellipse at 80% 0%, rgb(217 4 41 / 2.5%), transparent 34%);
+  background-attachment: fixed;
+}
+.sidebar {
+  box-shadow: 8px 0 30px rgb(12 12 13 / 4%);
+}
+.nav-item {
+  min-height: 43px;
+  transition: background-color .16s ease, color .16s ease, transform .16s ease;
+}
+.nav-item:hover {
+  background-color: var(--sidebar-hover);
+  transform: translateX(2px);
+}
+.nav-item.active:hover { transform: none; }
+.topbar {
+  margin-bottom: 28px;
+}
+.page-heading { min-width: 0; }
+.subtitle { line-height: 1.7; }
+.brand-stage {
+  box-shadow: 0 16px 38px rgb(17 18 22 / 14%);
+}
+.stat-card {
+  min-width: 0;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--red) 22%, var(--border));
+  box-shadow: var(--shadow-raised);
+}
+.analytics-card, .panel {
+  border: 1px solid var(--border);
+}
+.analytics-card {
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+.analytics-card:hover {
+  border-color: color-mix(in srgb, var(--red) 18%, var(--border));
+  box-shadow: var(--shadow-raised);
+}
+.section-block { margin-bottom: 30px; }
+.section-heading { margin-bottom: 15px; }
+.button-primary, .button-secondary, .button-small, .theme-toggle {
+  min-height: 40px;
+}
+.button-primary:focus-visible, .button-secondary:focus-visible,
+.button-small:focus-visible, .theme-toggle:focus-visible, .nav-item:focus-visible {
+  outline: 3px solid rgb(217 4 41 / 40%);
+  outline-offset: 3px;
+}
+input:focus-visible, select:focus-visible {
+  outline: 3px solid rgb(217 4 41 / 22%);
+  outline-offset: 1px;
+  box-shadow: none;
+}
+.search-box:focus-within, .filter-select:focus-within {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgb(217 4 41 / 9%);
+}
+.table-wrap {
+  border-top: 1px solid var(--border);
+}
+thead th { white-space: nowrap; }
+tbody tr:focus-within {
+  background: color-mix(in srgb, var(--red) 5%, var(--surface));
+}
+.page-footer {
+  line-height: 1.7;
+}
+:root[data-theme="dark"] body {
+  background-image: radial-gradient(ellipse at 80% 0%, rgb(217 4 41 / 5%), transparent 36%);
+}
+:root[data-theme="dark"] .stat-card:hover,
+:root[data-theme="dark"] .analytics-card:hover {
+  border-color: color-mix(in srgb, #ff536d 28%, var(--border));
+}
+@media (max-width: 1100px) {
+  .topbar { align-items: flex-start; }
+  .topbar-actions { max-width: 360px; }
+  .brand-stage { grid-template-columns: minmax(0, 1.1fr) minmax(190px, .9fr); }
+  .brand-stage-copy { padding-left: 24px; }
+  .brand-stage-overline { flex-wrap: wrap; line-height: 1.7; }
+}
+@media (max-width: 720px) {
+  body { background-attachment: scroll; }
+  .sidebar { box-shadow: 0 5px 20px rgb(12 12 13 / 5%); }
+  .nav-item { min-height: 40px; }
+  .workspace { padding-top: 20px; }
+  .topbar { margin-bottom: 22px; }
+  .page-heading .subtitle { max-width: 34ch; }
+  .brand-stage { box-shadow: 0 10px 24px rgb(17 18 22 / 12%); }
+  .stat-card:hover { transform: none; }
+  .section-block { margin-bottom: 25px; }
+  .section-heading { gap: 8px; }
+  .section-heading h2 { line-height: 1.35; }
+  .analytics-card:hover { box-shadow: var(--shadow-card); }
+  .panel-heading .subtitle { max-width: 38ch; }
+  .table-wrap { border-top: 1px solid var(--border); }
+  .page-footer { padding-inline: 2px; }
+}
+@media (max-width: 390px) {
+  .brand-stage-overline { max-width: 100%; font-size: 6.5px; }
+  .brand-stage-copy { padding-right: 13px; }
+  .brand-stage-tags { max-width: 235px; }
+  .theme-toggle { gap: 5px; }
+  .profile-copy strong { font-size: 9px; }
+  .stat-card { padding: 10px 9px; }
+  .stat-topline { gap: 5px; }
+  .stat-label { font-size: 7px; }
+  .stat-foot small { font-size: 8px; }
+  .form-header { gap: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-item:hover, .stat-card:hover { transform: none; }
+}
