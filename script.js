@@ -13,6 +13,34 @@ const formTitle = document.getElementById("formTitle");
 const saveButton = document.getElementById("saveMember");
 const cancelEditButton = document.getElementById("cancelEdit");
 const exportCsvButton = document.getElementById("exportCsv");
+
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = themeToggle.querySelector(".theme-icon");
+const themeLabel = themeToggle.querySelector(".theme-label");
+const themeStorageKey = "redhub-latihan-theme-v1";
+
+function applyTheme(theme, persist = false) {
+  const isDark = theme === "dark";
+  document.documentElement.dataset.theme = isDark ? "dark" : "light";
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  themeToggle.setAttribute("aria-label", isDark ? "Aktifkan tema terang" : "Aktifkan tema gelap");
+  themeIcon.textContent = isDark ? "☀" : "☾";
+  themeLabel.textContent = isDark ? "Mode Terang" : "Mode Gelap";
+  if (persist) {
+    try {
+      localStorage.setItem(themeStorageKey, isDark ? "dark" : "light");
+    } catch (error) {
+      // Tema tetap aktif selama halaman ini terbuka meski penyimpanan tidak tersedia.
+    }
+  }
+}
+
+applyTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+themeToggle.addEventListener("click", () => {
+  const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(nextTheme, true);
+});
+
 const storageKey = "redhub-latihan-members-v1";
 
 const initialMembers = [...memberRows.querySelectorAll("tr")].map((row, index) => ({
