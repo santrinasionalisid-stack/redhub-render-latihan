@@ -12,6 +12,7 @@ const statusInput = document.getElementById("memberStatus");
 const formTitle = document.getElementById("formTitle");
 const saveButton = document.getElementById("saveMember");
 const cancelEditButton = document.getElementById("cancelEdit");
+const exportCsvButton = document.getElementById("exportCsv");
 const storageKey = "redhub-latihan-members-v1";
 
 const initialMembers = [...memberRows.querySelectorAll("tr")].map((row, index) => ({
@@ -186,3 +187,29 @@ unitFilter.addEventListener("change", renderMembers);
 statusFilter.addEventListener("change", renderMembers);
 
 renderMembers();
+
+
+function exportMembersCsv() {
+  const headers = ["Nama Anggota", "Unit", "Jabatan", "Status"];
+  const rows = members.map(member => [
+    member.name,
+    member.unit === "BADAN" ? "Badan" : member.unit === "SAYAP" ? "Sayap" : member.unit,
+    member.role,
+    member.status
+  ]);
+  const escapeCsv = value => `"${String(value ?? "").replace(/"/g, '""')}"`;
+  const csv = [headers, ...rows]
+    .map(row => row.map(escapeCsv).join(";"))
+    .join("\r\n");
+  const blob = new Blob(["\\uFEFF", csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "redhub-data-anggota.csv";
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+exportCsvButton.addEventListener("click", exportMembersCsv);
