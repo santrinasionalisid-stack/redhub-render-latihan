@@ -121,7 +121,13 @@ function renderMembers() {
     name.textContent = member.name;
     nameCell.append(name);
     row.append(nameCell);
-    row.append(makeCell(member.unit === "BADAN" ? "Badan" : member.unit === "SAYAP" ? "Sayap" : member.unit));
+    const unitCell = document.createElement("td");
+    const unitTag = document.createElement("span");
+    const unitLabels = { DPC: "DPC", PAC: "PAC", BADAN: "Badan", SAYAP: "Sayap" };
+    unitTag.className = "unit-tag " + (member.unit === "DPC" ? "unit-dpc" : member.unit === "PAC" ? "unit-pac" : member.unit === "BADAN" ? "unit-badan" : "unit-sayap");
+    unitTag.textContent = unitLabels[member.unit] || member.unit;
+    unitCell.append(unitTag);
+    row.append(unitCell);
     row.append(makeCell(member.role));
 
     const statusCell = document.createElement("td");
