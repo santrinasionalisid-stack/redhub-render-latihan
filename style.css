@@ -813,5 +813,6 @@ tbody tr:hover { background: color-mix(in srgb, var(--red) 3%, var(--surface)); 
 
 
 /* Logo utama pada pusat brand stage */
-.stage-core-logo { display: block; width: 60px; height: 60px; object-fit: contain; flex: 0 0 auto; }
-@media (max-width: 720px) { .stage-core-logo { width: 39px; height: 39px; } }
+.stage-core { width: 154px; height: 154px; }
+.stage-core-logo { display: block; width: 104px; height: 104px; object-fit: contain; flex: 0 0 auto; }
+@media (max-width: 720px) { .stage-core { width: 104px; height: 104px; } .stage-core-logo { width: 72px; height: 72px; } }
