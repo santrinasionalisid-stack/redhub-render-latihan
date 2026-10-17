@@ -4,108 +4,355 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>REDHUB - Latihan Absensi</title>
+  <title>REDHUB | Dashboard Absensi</title>
   <style>
+    :root {
+      --red: #bd202e;
+      --dark: #202124;
+      --bg: #f5f6f8;
+      --muted: #737780;
+      --border: #e7e8ec;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      color: #222;
+      background: var(--bg);
+      color: var(--dark);
     }
-    header {
-      background: #b91f2d;
+
+    .layout { min-height: 100vh; }
+
+    aside {
+      width: 235px;
+      background: #202124;
       color: white;
-      padding: 22px;
+      padding: 24px 16px;
+      position: fixed;
+      inset: 0 auto 0 0;
     }
-    main {
-      max-width: 900px;
-      margin: 24px auto;
-      padding: 0 16px;
+
+    .brand {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 4px 12px 28px;
     }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+
+    .brand span { color: #f04b58; }
+
+    .nav-label {
+      color: #aeb0b6;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin: 16px 12px 10px;
     }
-    .card {
+
+    .nav-item {
+      display: block;
+      color: #e4e4e7;
+      padding: 12px;
+      margin-bottom: 5px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-item.active {
+      background: var(--red);
+      color: white;
+    }
+
+    .workspace {
+      margin-left: 235px;
+      padding: 28px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    h1 { font-size: 25px; margin: 0 0 8px; }
+    .subtitle { color: var(--muted); font-size: 14px; }
+
+    .profile {
       background: white;
-      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .card, .panel {
+      background: white;
+      border: 1px solid var(--border);
       border-radius: 12px;
-      box-shadow: 0 2px 8px #00000010;
     }
-    .number {
-      font-size: 28px;
-      font-weight: bold;
+
+    .card { padding: 20px; }
+    .stat-label { color: var(--muted); font-size: 13px; }
+    .stat-number { font-size: 29px; font-weight: 750; margin: 12px 0 8px; }
+    .stat-note { font-size: 12px; color: var(--muted); }
+    .red { color: var(--red); }
+
+    .panel { padding: 22px; }
+    .panel-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
     }
+
+    h2 { font-size: 17px; margin: 0; }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    input, select {
+      border: 1px solid #dfe1e6;
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: white;
+      font-size: 13px;
+      min-width: 135px;
+    }
+
+    input { min-width: 200px; }
+
+    .table-wrap { overflow-x: auto; }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      background: white;
-      margin-top: 20px;
+      font-size: 13px;
+      white-space: nowrap;
     }
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
+
+    th {
+      background: #f8f8fa;
+      color: #666a73;
+      font-weight: 600;
       text-align: left;
     }
-    th { background: #222; color: white; }
-    @media (max-width: 600px) {
-      .cards { grid-template-columns: 1fr; }
-      main { margin-top: 16px; }
+
+    th, td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .status {
+      display: inline-block;
+      border-radius: 20px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .present { background: #e4f7eb; color: #167442; }
+    .absent { background: #fff0e5; color: #a65312; }
+
+    .footer {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 1000px) {
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 650px) {
+      aside {
+        position: static;
+        width: 100%;
+        padding: 14px 16px;
+      }
+
+      .brand { padding: 4px 4px 12px; }
+
+      .nav-label { display: none; }
+
+      .nav-list {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+      }
+
+      .nav-item {
+        white-space: nowrap;
+        margin: 0;
+        padding: 10px;
+      }
+
+      .workspace {
+        margin-left: 0;
+        padding: 20px 14px;
+      }
+
+      .topbar { align-items: flex-start; }
+      h1 { font-size: 21px; }
+      .profile { display: none; }
+      .stats { gap: 10px; }
+      .card { padding: 14px; }
+      .stat-number { font-size: 25px; }
+      .panel { padding: 14px; }
+      .filters, .filters input, .filters select { width: 100%; }
+      input, select { min-width: 0; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>REDHUB</h1>
-    <p>Dashboard Absensi Anggota REDHUB</p>
-  </header>
+  <div class="layout">
+    <aside>
+      <div class="brand">RED<span>HUB</span></div>
+      <div class="nav-label">Menu Utama</div>
+      <nav class="nav-list">
+        <a class="nav-item active" href="#dashboard">Dashboard</a>
+        <a class="nav-item" href="#anggota">Anggota</a>
+        <a class="nav-item" href="#anggota">Absensi</a>
+        <a class="nav-item" href="#anggota">Laporan</a>
+      </nav>
+    </aside>
 
-  <main>
-    <h2>Ringkasan Kehadiran</h2>
+    <main class="workspace" id="dashboard">
+      <header class="topbar">
+        <div>
+          <h1>Dashboard Absensi</h1>
+          <div class="subtitle">Ringkasan kehadiran anggota organisasi</div>
+        </div>
+        <div class="profile">Administrator · Demo</div>
+      </header>
 
-    <section class="cards">
-      <div class="card">
-        Total Anggota
-        <div class="number">128</div>
-      </div>
-      <div class="card">
-        Hadir
-        <div class="number">86</div>
-      </div>
-      <div class="card">
-        Belum Absen
-        <div class="number">42</div>
-      </div>
-    </section>
+      <section class="stats">
+        <div class="card">
+          <div class="stat-label">Total Anggota</div>
+          <div class="stat-number">128</div>
+          <div class="stat-note">Seluruh unit organisasi</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Hadir</div>
+          <div class="stat-number">86</div>
+          <div class="stat-note">67,2% dari total anggota</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Belum Absen</div>
+          <div class="stat-number red">42</div>
+          <div class="stat-note">Perlu ditindaklanjuti</div>
+        </div>
+        <div class="card">
+          <div class="stat-label">Unit Organisasi</div>
+          <div class="stat-number">12</div>
+          <div class="stat-note">Data simulasi</div>
+        </div>
+      </section>
 
-    <h2>Daftar Anggota</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Nama</th>
-          <th>Unit</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Andi Pratama</td>
-          <td>DPC</td>
-          <td>Hadir</td>
-        </tr>
-        <tr>
-          <td>Siti Rahmawati</td>
-          <td>PAC</td>
-          <td>Hadir</td>
-        </tr>
-        <tr>
-          <td>Budi Santoso</td>
-          <td>Badan</td>
-          <td>Belum Absen</td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
+      <section class="panel" id="anggota">
+        <div class="panel-heading">
+          <h2>Daftar Anggota</h2>
+          <div class="filters">
+            <input id="search" type="search" placeholder="Cari nama anggota...">
+            <select id="unit">
+              <option value="">Semua Unit</option>
+              <option value="DPC">DPC</option>
+              <option value="PAC">PAC</option>
+              <option value="BADAN">Badan</option>
+              <option value="SAYAP">Sayap</option>
+            </select>
+            <select id="statusFilter">
+              <option value="">Semua Status</option>
+              <option value="Hadir">Hadir</option>
+              <option value="Belum Absen">Belum Absen</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nama Anggota</th>
+                <th>Unit</th>
+                <th>Jabatan</th>
+                <th>Status Absensi</th>
+              </tr>
+            </thead>
+            <tbody id="memberRows">
+              <tr data-name="Andi Pratama" data-unit="DPC" data-status="Hadir">
+                <td>Andi Pratama</td><td>DPC</td><td>Sekretaris</td>
+                <td><span class="status present">Hadir</span></td>
+              </tr>
+              <tr data-name="Siti Rahmawati" data-unit="PAC" data-status="Hadir">
+                <td>Siti Rahmawati</td><td>PAC</td><td>Bendahara</td>
+                <td><span class="status present">Hadir</span></td>
+              </tr>
+              <tr data-name="Budi Santoso" data-unit="BADAN" data-status="Belum Absen">
+                <td>Budi Santoso</td><td>Badan</td><td>Anggota</td>
+                <td><span class="status absent">Belum Absen</span></td>
+              </tr>
+              <tr data-name="Dewi Lestari" data-unit="SAYAP" data-status="Hadir">
+                <td>Dewi Lestari</td><td>Sayap</td><td>Sekretaris</td>
+                <td><span class="status present">Hadir</span></td>
+              </tr>
+              <tr data-name="Rudi Hartono" data-unit="PAC" data-status="Belum Absen">
+                <td>Rudi Hartono</td><td>PAC</td><td>Ketua</td>
+                <td><span class="status absent">Belum Absen</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p id="emptyMessage" hidden>Tidak ada anggota yang sesuai dengan filter.</p>
+        </div>
+        <div class="footer">Data simulasi untuk latihan — bukan data produksi REDHUB.</div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const search = document.getElementById('search');
+    const unit = document.getElementById('unit');
+    const statusFilter = document.getElementById('statusFilter');
+    const rows = [...document.querySelectorAll('#memberRows tr')];
+    const emptyMessage = document.getElementById('emptyMessage');
+
+    function filterMembers() {
+      const query = search.value.toLowerCase().trim();
+      let visible = 0;
+
+      rows.forEach(row => {
+        const matchesName = row.dataset.name.toLowerCase().includes(query);
+        const matchesUnit = !unit.value || row.dataset.unit === unit.value;
+        const matchesStatus = !statusFilter.value ||
+          row.dataset.status === statusFilter.value;
+        const show = matchesName && matchesUnit && matchesStatus;
+
+        row.hidden = !show;
+        if (show) visible++;
+      });
+
+      emptyMessage.hidden = visible !== 0;
+    }
+
+    search.addEventListener('input', filterMembers);
+    unit.addEventListener('change', filterMembers);
+    statusFilter.addEventListener('change', filterMembers);
+  </script>
 </body>
 </html>
