@@ -21,7 +21,7 @@
       <a class="nav-item" href="#anggota">Absensi</a>
       <a class="nav-item" href="#laporan">Laporan</a>
     </nav>
-    <div class="sidebar-footer">REDHUB · LATIHAN V3</div>
+    <div class="sidebar-footer">REDHUB · LATIHAN V5</div>
   </aside>
 
   <main class="workspace" id="dashboard">
@@ -78,10 +78,42 @@
           </select>
         </div>
       </div>
+      <form id="memberForm" class="member-form">
+        <div class="form-title">
+          <h3 id="formTitle">Tambah Anggota</h3>
+          <p class="subtitle">Data tersimpan di browser ini untuk latihan.</p>
+        </div>
+        <div class="form-fields">
+          <label>Nama anggota
+            <input id="memberName" name="memberName" type="text" placeholder="Contoh: Andi Pratama" required maxlength="80">
+          </label>
+          <label>Unit organisasi
+            <select id="memberUnit" name="memberUnit" required>
+              <option value="DPC">DPC</option>
+              <option value="PAC">PAC</option>
+              <option value="BADAN">Badan</option>
+              <option value="SAYAP">Sayap</option>
+            </select>
+          </label>
+          <label>Jabatan
+            <input id="memberRole" name="memberRole" type="text" placeholder="Contoh: Sekretaris" required maxlength="80">
+          </label>
+          <label>Status
+            <select id="memberStatus" name="memberStatus" required>
+              <option value="Hadir">Hadir</option>
+              <option value="Belum Absen">Belum Absen</option>
+            </select>
+          </label>
+          <div class="form-actions">
+            <button class="button-primary" type="submit" id="saveMember">Tambah Anggota</button>
+            <button class="button-secondary" type="button" id="cancelEdit" hidden>Batal</button>
+          </div>
+        </div>
+      </form>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Nama Anggota</th><th>Unit</th><th>Jabatan</th><th>Status</th></tr>
+            <tr><th>Nama Anggota</th><th>Unit</th><th>Jabatan</th><th>Status</th><th>Aksi</th></tr>
           </thead>
           <tbody id="memberRows">
             <tr data-name="Andi Pratama" data-unit="DPC" data-status="Hadir">
@@ -108,7 +140,7 @@
         </table>
         <p id="emptyMessage" class="empty" hidden>Tidak ada anggota yang sesuai filter.</p>
       </div>
-      <p class="footnote" id="laporan">Data simulasi — bukan data produksi REDHUB.</p>
+      <p class="footnote" id="laporan">Data simulasi tersimpan di browser ini — bukan data produksi REDHUB.</p>
     </section>
   </main>
 </body>
