@@ -700,7 +700,8 @@ body { font-family: "Poppins", sans-serif; letter-spacing: -.08px; }
 .brand-stage-tags { display: flex; flex-wrap: wrap; gap: 8px 19px; margin-top: 22px; }
 .brand-stage-tags span { display: inline-flex; align-items: center; gap: 7px; color: #777982; font-size: 8px; font-weight: 600; letter-spacing: .4px; }
 .brand-stage-tags b { color: #e0e0e4; font-size: 8px; font-weight: 600; letter-spacing: .6px; }
-.brand-stage-art { position: relative; min-height: 272px; overflow: hidden; }
+.brand-stage-art { position: relative; display: flex; align-items: center; justify-content: center; min-height: 272px; padding: 16px 18px 16px 0; overflow: hidden; }
+.brand-stage-logo { display: block; width: 100%; max-width: 430px; max-height: 242px; object-fit: contain; border: 1px solid rgb(255 255 255 / 68%); border-radius: 12px; background: #faf9fa; box-shadow: 0 12px 30px rgb(0 0 0 / 22%); }
 .stage-orbit { position: absolute; top: 50%; left: 52%; aspect-ratio: 1; border: 1px solid rgb(255 255 255 / 10%); border-radius: 50%; transform: translate(-50%, -50%); }
 .stage-orbit-one { width: 250px; box-shadow: 0 0 0 26px rgb(255 255 255 / 2%), 0 0 0 52px rgb(255 255 255 / 1.5%); }
 .stage-orbit-two { width: 184px; border-color: rgb(255 255 255 / 13%); }
