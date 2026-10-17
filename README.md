@@ -48,3 +48,17 @@ Buka `index.html` di browser modern. Tidak memerlukan proses build atau dependen
 - Analitik dihitung ulang otomatis setelah tambah, edit, atau hapus anggota; tidak memakai angka tren historis palsu.
 - Semua angka berasal dari data demo di browser dan bukan data live/produksi REDHUB.
 - Tema Light/Dark dan tata letak responsif tetap digunakan.
+
+
+## V9 — RedHub Signature UI
+
+- Menambahkan **brand stage** khusus RedHub dengan tagline “Terhubung dalam struktur. Terukur dalam kehadiran.” dan detail visual bertema command center.
+- Mengganti tipografi antarmuka ke Poppins dan menyelaraskan palet dengan identitas RedHub: merah #D90429, merah gelap #A60D1A, workspace netral, serta sidebar charcoal.
+- Memperhalus hierarki visual, kartu statistik, status navigasi, tombol utama, batas komponen, dan kontras Light/Dark.
+- Menata ulang brand stage agar tetap ringkas dan terbaca pada layar ponsel.
+- Perubahan dibatasi pada presentasi; logika CRUD, localStorage, filter, statistik, analitik kehadiran, dan ekspor CSV tetap dipertahankan.
+
+### Catatan validasi V9
+
+- Pemeriksaan statis struktur dan selector dilakukan setelah perubahan.
+- Visual QA di browser desktop/mobile dan verifikasi deployment Render tetap perlu dilakukan sebelum memberi nilai akhir 90/100.
