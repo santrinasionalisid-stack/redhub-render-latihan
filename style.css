@@ -788,3 +788,25 @@ tbody tr:hover { background: color-mix(in srgb, var(--red) 3%, var(--surface)); 
   .brand-stage-tags span, .brand-stage-tags b { font-size: 6px; }
   .brand-stage-art { opacity: .24; }
 }
+
+
+/* Official REDHUB logo — scoped to the sidebar brand to protect V7 layout */
+.brand-logo {
+  display: block;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  padding: 2px;
+  object-fit: contain;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 12px;
+  background: #111112;
+}
+@media (max-width: 720px) {
+  .brand-logo {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+}
