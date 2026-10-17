@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>REDHUB - Latihan Absensi</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #222;
+    }
+    header {
+      background: #b91f2d;
+      color: white;
+      padding: 22px;
+    }
+    main {
+      max-width: 900px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #00000010;
+    }
+    .number {
+      font-size: 28px;
+      font-weight: bold;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th { background: #222; color: white; }
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: 1fr; }
+      main { margin-top: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>REDHUB</h1>
+    <p>Dashboard Absensi Anggota</p>
+  </header>
+
+  <main>
+    <h2>Ringkasan Kehadiran</h2>
+
+    <section class="cards">
+      <div class="card">
+        Total Anggota
+        <div class="number">128</div>
+      </div>
+      <div class="card">
+        Hadir
+        <div class="number">86</div>
+      </div>
+      <div class="card">
+        Belum Absen
+        <div class="number">42</div>
+      </div>
+    </section>
+
+    <h2>Daftar Anggota</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Unit</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Andi Pratama</td>
+          <td>DPC</td>
+          <td>Hadir</td>
+        </tr>
+        <tr>
+          <td>Siti Rahmawati</td>
+          <td>PAC</td>
+          <td>Hadir</td>
+        </tr>
+        <tr>
+          <td>Budi Santoso</td>
+          <td>Badan</td>
+          <td>Belum Absen</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
