@@ -1,26 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b91f2d">
+  <title>REDHUB | Dashboard Absensi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#dashboard">RED<span>HUB</span></a>
+    <p class="nav-label">MENU UTAMA</p>
+    <nav class="nav-list">
+      <a class="nav-item active" href="#dashboard">Dashboard</a>
+      <a class="nav-item" href="#anggota">Anggota</a>
+      <a class="nav-item" href="#anggota">Absensi</a>
+      <a class="nav-item" href="#laporan">Laporan</a>
+    </nav>
+    <div class="sidebar-footer">REDHUB · LATIHAN V3</div>
+  </aside>
 
-<section class="stats">
-  <article class="stat-card">
-    <p>Total Anggota</p>
-    <div class="stat-number" id="totalMembers">0</div>
-    <small>Seluruh anggota terdaftar</small>
-  </article>
+  <main class="workspace" id="dashboard">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">RINGKASAN ORGANISASI</p>
+        <h1>Dashboard Absensi</h1>
+        <p class="subtitle">Pantau kehadiran anggota dalam satu tampilan.</p>
+      </div>
+      <div class="profile">
+        <div class="avatar">A</div>
+        <div><strong>Administrator</strong><small>Mode Demo</small></div>
+      </div>
+    </header>
 
-  <article class="stat-card">
-    <p>Hadir</p>
-    <div class="stat-number" id="totalPresent">0</div>
-    <small class="positive" id="attendanceRate">0% dari anggota</small>
-  </article>
+    <section class="stats">
+      <article class="stat-card">
+        <p>Total Anggota</p><div class="stat-number">128</div>
+        <small>Seluruh unit organisasi</small>
+      </article>
+      <article class="stat-card">
+        <p>Hadir</p><div class="stat-number">86</div>
+        <small class="positive">67,2% dari total anggota</small>
+      </article>
+      <article class="stat-card">
+        <p>Belum Absen</p><div class="stat-number red">42</div>
+        <small>Perlu ditindaklanjuti</small>
+      </article>
+      <article class="stat-card">
+        <p>Unit Organisasi</p><div class="stat-number">12</div>
+        <small>DPC, PAC, Badan, Sayap</small>
+      </article>
+    </section>
 
-  <article class="stat-card">
-    <p>Belum Absen</p>
-    <div class="stat-number red" id="totalAbsent">0</div>
-    <small>Belum melakukan absensi</small>
-  </article>
-
-  <article class="stat-card">
-    <p>Unit Organisasi</p>
-    <div class="stat-number" id="totalUnits">0</div>
-    <small>DPC, PAC, Badan, Sayap</small>
-  </article>
-</section>
+    <section class="panel" id="anggota">
+      <div class="panel-heading">
+        <div>
+          <h2>Daftar Anggota</h2>
+          <p class="subtitle">Data contoh untuk pengujian filter.</p>
+        </div>
+        <div class="filters">
+          <input id="search" type="search" placeholder="Cari nama anggota...">
+          <select id="unit">
+            <option value="">Semua Unit</option>
+            <option value="DPC">DPC</option>
+            <option value="PAC">PAC</option>
+            <option value="BADAN">Badan</option>
+            <option value="SAYAP">Sayap</option>
+          </select>
+          <select id="statusFilter">
+            <option value="">Semua Status</option>
+            <option value="Hadir">Hadir</option>
+            <option value="Belum Absen">Belum Absen</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nama Anggota</th><th>Unit</th><th>Jabatan</th><th>Status</th></tr>
+          </thead>
+          <tbody id="memberRows">
+            <tr data-name="Andi Pratama" data-unit="DPC" data-status="Hadir">
+              <td><strong>Andi Pratama</strong></td><td>DPC</td><td>Sekretaris</td>
+              <td><span class="status present">Hadir</span></td>
+            </tr>
+            <tr data-name="Siti Rahmawati" data-unit="PAC" data-status="Hadir">
+              <td><strong>Siti Rahmawati</strong></td><td>PAC</td><td>Bendahara</td>
+              <td><span class="status present">Hadir</span></td>
+            </tr>
+            <tr data-name="Budi Santoso" data-unit="BADAN" data-status="Belum Absen">
+              <td><strong>Budi Santoso</strong></td><td>Badan</td><td>Anggota</td>
+              <td><span class="status absent">Belum Absen</span></td>
+            </tr>
+            <tr data-name="Dewi Lestari" data-unit="SAYAP" data-status="Hadir">
+              <td><strong>Dewi Lestari</strong></td><td>Sayap</td><td>Sekretaris</td>
+              <td><span class="status present">Hadir</span></td>
+            </tr>
+            <tr data-name="Rudi Hartono" data-unit="PAC" data-status="Belum Absen">
+              <td><strong>Rudi Hartono</strong></td><td>PAC</td><td>Ketua</td>
+              <td><span class="status absent">Belum Absen</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p id="emptyMessage" class="empty" hidden>Tidak ada anggota yang sesuai filter.</p>
+      </div>
+      <p class="footnote" id="laporan">Data simulasi — bukan data produksi REDHUB.</p>
+    </section>
+  </main>
+</body>
+</html>
