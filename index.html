@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    try {
+      const savedTheme = localStorage.getItem("redhub-latihan-theme-v1");
+      if (savedTheme === "dark") document.documentElement.dataset.theme = "dark";
+    } catch (_) {}
+  </script>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
@@ -31,9 +37,15 @@
         <h1>Dashboard Absensi</h1>
         <p class="subtitle">Pantau kehadiran anggota dalam satu tampilan.</p>
       </div>
-      <div class="profile">
+      <div class="topbar-actions">
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Aktifkan tema gelap" aria-pressed="false">
+          <span class="theme-icon" aria-hidden="true">☾</span>
+          <span class="theme-label">Mode Gelap</span>
+        </button>
+        <div class="profile">
         <div class="avatar">A</div>
         <div><strong>Administrator</strong><small>Mode Demo</small></div>
+        </div>
       </div>
     </header>
 
