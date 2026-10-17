@@ -272,27 +272,15 @@ h1 { margin: 0; font-size: clamp(26px, 2.5vw, 33px); line-height: 1.15; font-wei
 h1 span { font-weight: 600; }
 .subtitle { margin: 7px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
 .topbar-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
-.environment-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 35px;
-  padding: 0 10px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--muted-strong);
-  background: var(--surface);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .55px;
-  white-space: nowrap;
-}
 .theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 38px;
+  box-sizing: border-box;
+  flex: 0 0 168px;
+  width: 168px;
+  height: 44px;
   padding: 8px 12px;
   border: 1px solid var(--border);
   border-radius: 9px;
@@ -309,8 +297,11 @@ h1 span { font-weight: 600; }
 .profile {
   display: flex;
   align-items: center;
+  box-sizing: border-box;
+  flex: 0 0 168px;
+  width: 168px;
+  height: 44px;
   gap: 9px;
-  min-height: 44px;
   padding: 4px 10px 4px 5px;
   border: 1px solid var(--border);
   border-radius: 11px;
@@ -513,9 +504,8 @@ tbody tr:last-child td { border-bottom: 0; }
   .breadcrumb { margin-bottom: 14px; }
   h1 { font-size: 27px; }
   .topbar-actions { width: 100%; justify-content: flex-start; gap: 7px; }
-  .environment-pill { min-height: 34px; font-size: 8px; }
-  .theme-toggle { min-height: 34px; padding: 7px 9px; font-size: 10px; }
-  .profile { margin-left: auto; min-height: 36px; padding: 3px 7px 3px 3px; }
+  .theme-toggle, .profile { flex: 1 1 0; width: calc(50% - 4px); min-width: 0; }
+  .profile { margin-left: 0; padding: 3px 7px 3px 3px; }
   .avatar { width: 28px; height: 28px; }
   .profile-copy strong { font-size: 10px; }
   .profile-copy small, .profile-chevron { display: none; }
@@ -559,8 +549,6 @@ tbody tr:last-child td { border-bottom: 0; }
   .stat-card { padding: 10px; }
   .stat-label { font-size: 7px; }
   .stat-number { font-size: 26px; }
-  .environment-pill { display: none; }
-  .profile { margin-left: auto; }
   .panel-actions { flex-direction: column; align-items: stretch; }
   .filters { grid-template-columns: 1fr; }
   .search-box { grid-column: auto; }
