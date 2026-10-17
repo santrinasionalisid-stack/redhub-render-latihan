@@ -234,3 +234,74 @@ tbody tr:hover { background: #fafafa; }
   .filters input, .filters select { width: 100%; min-width: 0; }
   th, td { padding: 13px 10px; }
 }
+
+
+/* V5: form and member row actions */
+.member-form {
+  background: #fafafb;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin: 0 0 22px;
+}
+
+.form-title { margin-bottom: 15px; }
+.form-title h3 { margin: 0; font-size: 16px; font-weight: 800; }
+.form-fields {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.2fr 1fr auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.form-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #555963;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.form-fields input, .form-fields select { width: 100%; min-width: 0; }
+.form-actions { display: flex; gap: 8px; align-items: center; }
+
+.button-primary, .button-secondary, .button-small {
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .15s ease, background .15s ease;
+}
+
+.button-primary {
+  background: var(--red);
+  color: white;
+  padding: 12px 14px;
+  white-space: nowrap;
+}
+
+.button-secondary {
+  background: #e9eaee;
+  color: #353740;
+  padding: 12px 14px;
+}
+
+.button-primary:hover, .button-secondary:hover, .button-small:hover { opacity: .82; }
+.button-small { padding: 7px 9px; font-size: 11px; }
+.row-actions { display: flex; gap: 6px; }
+.button-edit { background: #f0f1f4; color: #353740; }
+.button-delete { background: #fff0f1; color: var(--red); }
+
+@media (max-width: 1250px) {
+  .form-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .form-actions { grid-column: 1 / -1; }
+}
+
+@media (max-width: 680px) {
+  .member-form { padding: 14px; }
+  .form-fields { grid-template-columns: 1fr; }
+  .form-actions { grid-column: auto; }
+  .button-primary, .button-secondary { flex: 1; }
+}
