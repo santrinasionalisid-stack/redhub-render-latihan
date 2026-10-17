@@ -305,3 +305,15 @@ tbody tr:hover { background: #fafafa; }
   .form-actions { grid-column: auto; }
   .button-primary, .button-secondary { flex: 1; }
 }
+
+
+/* V6: CSV export control */
+.export-button {
+  align-self: stretch;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+@media (max-width: 680px) {
+  .export-button { width: 100%; }
+}
