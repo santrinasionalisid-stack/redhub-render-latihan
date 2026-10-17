@@ -89,6 +89,62 @@ function updateStatistics() {
     `${attendanceRate.toLocaleString("id-ID", { maximumFractionDigits: 1 })}% dari total anggota`;
   statCards[2].querySelector(".stat-number").textContent = notCheckedIn;
   statCards[3].querySelector(".stat-number").textContent = units;
+  updateAttendanceAnalytics(total, present, notCheckedIn, attendanceRate);
+}
+
+function updateAttendanceAnalytics(total, present, notCheckedIn, attendanceRate) {
+  const rate = total ? Math.round(attendanceRate) : 0;
+  const donut = document.getElementById("attendanceDonut");
+  if (!donut) return;
+  donut.style.setProperty("--attendance-angle", `${rate * 3.6}deg`);
+  donut.setAttribute("aria-label", `Tingkat kehadiran ${rate}%`);
+  document.getElementById("attendanceRateValue").textContent = `${rate}%`;
+  document.getElementById("analyticsPresent").textContent = present;
+  document.getElementById("analyticsAbsent").textContent = notCheckedIn;
+  document.getElementById("attendanceSummary").textContent =
+    `${present.toLocaleString("id-ID")} dari ${total.toLocaleString("id-ID")} anggota telah hadir.`;
+
+  const chart = document.getElementById("unitAttendanceChart");
+  const unitOrder = ["DPC", "PAC", "BADAN", "SAYAP"];
+  const unitLabels = { DPC: "DPC", PAC: "PAC", BADAN: "Badan", SAYAP: "Sayap" };
+  const counts = unitOrder.map(unit => {
+    const group = members.filter(member => member.unit === unit);
+    return {
+      unit,
+      label: unitLabels[unit],
+      total: group.length,
+      present: group.filter(member => member.status === "Hadir").length,
+      absent: group.filter(member => member.status === "Belum Absen").length
+    };
+  }).filter(group => group.total > 0);
+  if (!counts.length) {
+    chart.innerHTML = '<div class="unit-chart-empty">Belum ada data anggota untuk dianalisis.</div>';
+    return;
+  }
+  chart.replaceChildren();
+  counts.forEach(group => {
+    const row = document.createElement("div");
+    row.className = "unit-chart-row";
+    const label = document.createElement("span");
+    label.className = "unit-chart-label";
+    label.textContent = group.label;
+    const track = document.createElement("div");
+    track.className = "unit-chart-track";
+    track.setAttribute("role", "img");
+    track.setAttribute("aria-label", `${group.label}: ${group.present} hadir, ${group.absent} belum absen`);
+    const presentBar = document.createElement("span");
+    presentBar.className = "unit-chart-present";
+    presentBar.style.width = `${group.total ? group.present / group.total * 100 : 0}%`;
+    const absentBar = document.createElement("span");
+    absentBar.className = "unit-chart-absent";
+    absentBar.style.width = `${group.total ? group.absent / group.total * 100 : 0}%`;
+    track.append(presentBar, absentBar);
+    const values = document.createElement("span");
+    values.className = "unit-chart-values";
+    values.innerHTML = `<strong>${group.present}</strong> / ${group.total}`;
+    row.append(label, track, values);
+    chart.append(row);
+  });
 }
 
 function makeCell(text) {
