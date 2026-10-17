@@ -62,3 +62,12 @@ Buka `index.html` di browser modern. Tidak memerlukan proses build atau dependen
 
 - Pemeriksaan statis struktur dan selector dilakukan setelah perubahan.
 - Visual QA di browser desktop/mobile dan verifikasi deployment Render tetap perlu dilakukan sebelum memberi nilai akhir 90/100.
+
+
+## V10 — Precision layout polish
+
+- Menyamakan dimensi tombol tema dan kartu administrator pada topbar desktop, serta menjaga proporsi setara pada tablet dan ponsel.
+- Merapikan breakpoint form agar kolom input dan tombol aksi tidak terdesak pada viewport yang lebih sempit.
+- Memperhalus fokus input, transisi interaksi, keterbacaan badge, dan scrollbar tabel.
+- Perubahan hanya pada CSS; JavaScript CRUD, localStorage, pencarian/filter, statistik, analitik, dan ekspor CSV tidak diubah.
+- Validasi akhir tetap memerlukan pemeriksaan visual pada deployment Render di desktop, tablet, dan ponsel.
