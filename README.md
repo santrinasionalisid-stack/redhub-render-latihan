@@ -39,3 +39,12 @@ Buka `index.html` di browser modern. Tidak memerlukan proses build atau dependen
 4. Ekspor CSV dan periksa isi file.
 5. Periksa desktop, tablet, dan layar handphone; pastikan halaman tidak meluber secara horizontal (tabel boleh digeser di area tabelnya).
 6. Pastikan repository ini saja yang diperbarui; repository REDHUB produksi tidak disentuh.
+
+
+## V8 — Statistik & Analitik Kehadiran
+
+- Menambahkan kartu tingkat kehadiran berbentuk donut dengan jumlah hadir dan belum absen.
+- Menambahkan grafik batang per unit (DPC, PAC, Badan, Sayap) yang mengikuti data anggota lokal.
+- Analitik dihitung ulang otomatis setelah tambah, edit, atau hapus anggota; tidak memakai angka tren historis palsu.
+- Semua angka berasal dari data demo di browser dan bukan data live/produksi REDHUB.
+- Tema Light/Dark dan tata letak responsif tetap digunakan.
