@@ -1,4 +1,4 @@
-name: REDHUB UI smoke tests
+name: REDHUB UI smoke tests and visual capture
 
 on:
   workflow_dispatch:
@@ -13,9 +13,9 @@ permissions:
 
 jobs:
   smoke-test:
-    name: Browser smoke tests
+    name: Browser smoke tests and visual capture
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,3 +35,18 @@ jobs:
         env:
           BASE_URL: ${{ inputs.base_url }}
         run: node tests/ui-smoke.mjs
+
+      - name: Capture desktop and mobile screenshots
+        if: always()
+        env:
+          BASE_URL: ${{ inputs.base_url }}
+        run: node tests/ui-screenshots.mjs
+
+      - name: Upload visual audit screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: redhub-ui-visual-audit
+          path: artifacts/ui-audit/
+          if-no-files-found: warn
+          retention-days: 7
