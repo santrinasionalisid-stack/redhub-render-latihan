@@ -30,6 +30,8 @@ async function captureRole(role, viewport, suffix) {
     await page.locator("#demoLoginForm button[type=submit]").click();
     await page.locator(".nav-item").first().waitFor({ state: "visible", timeout: 10000 });
     await page.waitForLoadState("domcontentloaded").catch(() => {});
+    // Keep transient success toasts out of baseline dashboard screenshots.
+    await page.locator(".demo-toast.is-visible").waitFor({ state: "hidden", timeout: 6000 }).catch(() => {});
     await page.screenshot({
       path: `${outputDir}/dashboard-${role.name}-${suffix}.png`,
       fullPage: true,
