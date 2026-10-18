@@ -1733,3 +1733,154 @@ body.auth-required > .workspace { display: none !important; }
   .login-intro { margin-bottom: 27px; font-size: 12px; }
   .login-form-wrap .demo-input { min-height: 49px; }
 }
+
+
+/* V15 — enterprise consistency and responsive polish */
+:root {
+  --radius-control: 10px;
+  --radius-panel: 14px;
+  --focus-ring: 0 0 0 4px rgb(217 4 41 / 11%);
+}
+button, .button-primary, .button-secondary, .button-small, .nav-item {
+  touch-action: manipulation;
+}
+button:disabled, input:disabled, select:disabled {
+  cursor: not-allowed;
+  opacity: .58;
+}
+input, select, textarea {
+  accent-color: var(--red);
+}
+input::placeholder, textarea::placeholder {
+  color: #969ba6;
+  opacity: 1;
+}
+.demo-input:focus-visible,
+.member-form input:focus-visible,
+.member-form select:focus-visible,
+.filters input:focus-visible,
+.filters select:focus-visible {
+  border-color: var(--red);
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.button-primary:active, .button-secondary:active, .button-small:active {
+  transform: translateY(1px);
+}
+.button-small {
+  border-radius: 8px;
+  font-weight: 700;
+  transition: color .16s ease, background-color .16s ease, border-color .16s ease, transform .16s ease;
+}
+.button-small:hover {
+  border-color: var(--red);
+}
+.panel, .analytics-card, .scanner-card, .member-id-card, .stat-card {
+  scroll-margin-top: 20px;
+}
+.panel-heading .panel-actions:empty {
+  display: none;
+}
+.generated-panel .panel-heading {
+  align-items: center;
+}
+.generated-panel .panel-heading .panel-title {
+  max-width: 720px;
+}
+.generated-panel .panel-heading .panel-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.generated-table-wrap {
+  border-top: 0;
+}
+.generated-table-wrap th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.generated-table-wrap tbody tr {
+  transition: background-color .14s ease;
+}
+.generated-table-wrap tbody tr:hover {
+  background: var(--row-hover);
+}
+.generated-table-wrap td {
+  vertical-align: middle;
+}
+.status {
+  max-width: 100%;
+  width: fit-content;
+  white-space: nowrap;
+}
+.data-source-pill {
+  white-space: nowrap;
+}
+.analytics-card, .generated-content-grid .analytics-card {
+  border-radius: 13px;
+}
+.settings-form .demo-input,
+.scanner-card .demo-input {
+  min-height: 46px;
+}
+.demo-toast {
+  max-width: min(420px, calc(100vw - 28px));
+  line-height: 1.6;
+}
+.login-shell {
+  border-color: rgb(255 255 255 / 20%);
+}
+.login-form-wrap .login-submit:focus-visible {
+  outline-offset: 4px;
+}
+.mobile-nav-toggle[aria-expanded="true"] {
+  border-color: var(--red);
+  color: var(--red);
+}
+@media (max-width: 900px) {
+  .generated-panel .panel-heading {
+    align-items: flex-start;
+  }
+  .generated-panel .panel-heading .panel-actions {
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .generated-panel .panel-heading .panel-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+    width: 100%;
+  }
+  .generated-panel .panel-heading .panel-actions > * {
+    min-width: 0;
+    white-space: normal;
+  }
+  .generated-table-wrap table {
+    min-width: 660px;
+  }
+  .settings-form {
+    padding: 16px;
+  }
+  .profile-detail-grid {
+    overflow-wrap: anywhere;
+  }
+  .login-shell {
+    box-shadow: none;
+  }
+}
+@media (max-width: 370px) {
+  .login-form-wrap .login-submit {
+    min-height: 49px;
+  }
+  .generated-panel .panel-heading .panel-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
