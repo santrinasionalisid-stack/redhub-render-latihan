@@ -1884,3 +1884,18 @@ input::placeholder, textarea::placeholder {
     transition-duration: .01ms !important;
   }
 }
+
+
+/* V16 — tighter mobile dashboard rhythm and cleaner first viewport. */
+@media (max-width: 600px) {
+  .workspace { padding-top: 10px; }
+  .topbar { gap: 8px; margin-bottom: 18px; }
+  .page-heading .breadcrumb { margin-bottom: 9px; }
+  .page-heading .subtitle { line-height: 1.45; }
+  .section-block { margin-bottom: 21px; }
+  .section-heading { margin-bottom: 12px; }
+}
+@media (max-width: 370px) {
+  .workspace { padding-top: 9px; }
+  .topbar { gap: 7px; margin-bottom: 16px; }
+}
