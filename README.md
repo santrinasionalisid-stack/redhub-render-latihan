@@ -88,3 +88,13 @@ Buka `index.html` di browser modern. Tidak memerlukan proses build atau dependen
 - Render aktual di Render: belum diverifikasi; wajib ditinjau setelah deployment.
 - CSS brace balance: PASS. QA viewport 360, 390, 430, 768, 1024, 1366, 1440 px masih perlu ditinjau.
 - Status UI: READY FOR USER REVIEW setelah hasil aktual dirender; bukan visual PASS.
+
+
+## V14 — Professional login and product copy
+
+- Menghapus pilihan **Masuk sebagai**, seluruh opsi **Coba Cepat**, dan kontrol tambahan di area login. Form hanya menampilkan email, kata sandi, dan tombol **Masuk**.
+- Memperbarui headline, deskripsi, label, dan microcopy agar ringkas, konsisten, dan sesuai aplikasi organisasi profesional.
+- Merapikan hierarki tipografi, jarak antar-elemen, ukuran input, dan tombol login untuk desktop serta layar ponsel.
+- Memperbarui judul halaman dan metadata deskripsi.
+- Pada prototype ini, peran workspace dipetakan secara lokal dari nama email (superadmin…, admin…, atau akun lain). Ini bukan autentikasi server; sistem produksi tidak terhubung atau diubah.
+- Perubahan dibatasi pada repository latihan ini. Repository REDHUB produksi tetap tidak disentuh.

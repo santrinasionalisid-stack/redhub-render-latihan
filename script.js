@@ -314,9 +314,9 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     pengurus: "Pengurus"
   };
   const roleSubtitles = {
-    super_admin: "Kontrol platform dan operasional organisasi",
-    admin: "Operasional kesekretariatan",
-    pengurus: "Portal pengurus organisasi"
+    super_admin: "Administrasi platform dan tata kelola organisasi",
+    admin: "Pengelolaan operasional organisasi",
+    pengurus: "Ruang kerja pengurus"
   };
   const navByRole = {
     super_admin: [
@@ -358,18 +358,18 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     anggota: ["Pengurus & Anggota", "DATA ORGANISASI", "Kelola identitas, unit, jabatan, dan status anggota."],
     rapat: ["Rapat / Kegiatan", "AGENDA ORGANISASI", "Atur agenda, peserta, undangan, dan status rapat."],
     scanner: ["Scanner QR", "CHECK-IN KEHADIRAN", "Validasi identitas anggota sebelum mencatat kehadiran."],
-    undangan: ["Undangan & WhatsApp", "DISTRIBUSI UNDANGAN", "Kelola dokumen undangan dan simulasi distribusi WhatsApp."],
+    undangan: ["Undangan & WhatsApp", "DISTRIBUSI UNDANGAN", "Kelola dokumen undangan dan distribusi undangan melalui WhatsApp."],
     absensi: ["Absensi", "MONITORING KEHADIRAN", "Pantau dan koreksi kehadiran dengan jejak perubahan."],
-    laporan: ["Laporan", "ANALITIK & PELAPORAN", "Ringkasan yang dapat ditinjau dan diekspor dari data demo."],
-    admins: ["Kelola Admin", "AKSES PLATFORM", "Kelola akun administratif pada simulasi ini."],
-    "whatsapp-settings": ["Pengaturan WhatsApp", "INTEGRASI PLATFORM", "Konfigurasi tampilan integrasi WhatsApp demo."],
-    audit: ["Audit Log", "JEJAK AKTIVITAS", "Contoh riwayat aktivitas operasional untuk kebutuhan audit."],
-    konfigurasi: ["Konfigurasi Sistem", "PREFERENSI PLATFORM", "Pengaturan umum pada prototype lokal."],
+    laporan: ["Laporan", "ANALITIK & PELAPORAN", "Tinjau, analisis, dan ekspor ringkasan kehadiran."],
+    admins: ["Kelola Admin", "AKSES PLATFORM", "Atur akses dan akun administratif."],
+    "whatsapp-settings": ["Pengaturan WhatsApp", "INTEGRASI PLATFORM", "Kelola preferensi integrasi WhatsApp."],
+    audit: ["Audit Log", "JEJAK AKTIVITAS", "Tinjau riwayat aktivitas operasional."],
+    konfigurasi: ["Konfigurasi Sistem", "PREFERENSI PLATFORM", "Kelola preferensi umum platform."],
     "qr-saya": ["QR Saya", "IDENTITAS DIGITAL", "Tampilkan kartu QR anggota untuk kebutuhan check-in."],
     "rapat-saya": ["Rapat Saya", "AGENDA PRIBADI", "Lihat agenda yang ditujukan kepada Anda."],
     riwayat: ["Riwayat Kehadiran", "REKAM KEHADIRAN", "Lihat riwayat kehadiran pribadi."],
     "rapor-saya": ["Rapor Saya", "RINGKASAN PRIBADI", "Pantau perkembangan kehadiran Anda."],
-    profil: ["Profil Saya", "IDENTITAS ANGGOTA", "Informasi profil dan jabatan aktif pada data demo."]
+    profil: ["Profil Saya", "IDENTITAS ANGGOTA", "Informasi profil dan jabatan aktif Anda."]
   };
   const icons = {
     "grid-2x2": '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>',
@@ -477,11 +477,11 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
       const rows = demoAttendance.map(function (m, i) {
         return [escapeHtml(m[0]), escapeHtml(m[1]), escapeHtml(m[2]), '<span class="status ' + (m[3] === "Hadir" ? "present" : "absent") + '" data-status-cell>' + m[3] + '</span>', '<button class="button-small button-edit" data-action="toggle-attendance" data-row="' + i + '">Ubah status</button>'];
       });
-      return panel("Monitoring absensi", "Data contoh untuk memperlihatkan alur pemantauan dan koreksi.", '<div class="table-toolbar"><div class="table-caption"><strong>Peserta rapat</strong><span class="data-source-pill"><span class="online-dot"></span> Data demo</span></div><label class="search-box" for="attendanceSearch"><input id="attendanceSearch" type="search" placeholder="Cari nama peserta..." aria-label="Cari nama peserta"></label></div>' + table(["Nama", "Unit", "Jabatan", "Kehadiran", "Aksi"], rows) + '<p class="demo-note">Koreksi pada halaman ini hanya mengubah tampilan sesi, tidak tersimpan ke server.</p>', button("Ekspor CSV", "export-attendance", true));
+      return panel("Monitoring absensi", "Pantau kehadiran peserta dan lakukan koreksi sesuai kebutuhan.", '<div class="table-toolbar"><div class="table-caption"><strong>Peserta rapat</strong><span class="data-source-pill"><span class="online-dot"></span> Data demo</span></div><label class="search-box" for="attendanceSearch"><input id="attendanceSearch" type="search" placeholder="Cari nama peserta..." aria-label="Cari nama peserta"></label></div>' + table(["Nama", "Unit", "Jabatan", "Kehadiran", "Aksi"], rows) + '<p class="demo-note">Koreksi pada halaman ini hanya mengubah tampilan sesi, tidak tersimpan ke server.</p>', button("Ekspor CSV", "export-attendance", true));
     }
     if (route === "laporan" || route === "rapor-saya") {
       const personal = role === "pengurus";
-      return '<div class="stats generated-stats">' + metricCard(personal ? "KEHADIRAN PRIBADI" : "TINGKAT KEHADIRAN", personal ? "92%" : "67,2%", personal ? "11 dari 12 agenda" : "86 dari 128 anggota", "stat-present") + metricCard(personal ? "HADIR" : "TOTAL ANGGOTA", personal ? "11" : "128", personal ? "Dalam periode aktif" : "Seluruh unit demo", "") + metricCard(personal ? "IZIN" : "BELUM ABSEN", personal ? "1" : "42", personal ? "Tercatat pada agenda" : "Perlu ditindaklanjuti", "stat-absent") + '</div>' + panel(personal ? "Rapor kehadiran saya" : "Ringkasan laporan", "Angka ini merupakan data ilustrasi prototype.", '<div class="report-bars"><div><span>September</span><i style="--bar:82%"></i><b>82%</b></div><div><span>Oktober</span><i style="--bar:92%"></i><b>92%</b></div><div><span>November</span><i style="--bar:76%"></i><b>76%</b></div></div><p class="demo-note">Grafik contoh untuk pratinjau UI, bukan tren historis produksi.</p>', button("Ekspor CSV", "export-report", true) + button("Cetak Laporan", "print-report", false));
+      return '<div class="stats generated-stats">' + metricCard(personal ? "KEHADIRAN PRIBADI" : "TINGKAT KEHADIRAN", personal ? "92%" : "67,2%", personal ? "11 dari 12 agenda" : "86 dari 128 anggota", "stat-present") + metricCard(personal ? "HADIR" : "TOTAL ANGGOTA", personal ? "11" : "128", personal ? "Dalam periode aktif" : "Seluruh unit demo", "") + metricCard(personal ? "IZIN" : "BELUM ABSEN", personal ? "1" : "42", personal ? "Tercatat pada agenda" : "Perlu ditindaklanjuti", "stat-absent") + '</div>' + panel(personal ? "Rapor kehadiran saya" : "Ringkasan laporan", "Ringkasan kehadiran untuk periode yang dipilih.", '<div class="report-bars"><div><span>September</span><i style="--bar:82%"></i><b>82%</b></div><div><span>Oktober</span><i style="--bar:92%"></i><b>92%</b></div><div><span>November</span><i style="--bar:76%"></i><b>76%</b></div></div><p class="demo-note">Grafik contoh untuk pratinjau UI, bukan tren historis produksi.</p>', button("Ekspor CSV", "export-report", true) + button("Cetak Laporan", "print-report", false));
     }
     if (route === "admins") {
       return panel("Akun administratif", "Hanya Super Admin yang melihat halaman ini pada prototype.", table(["Nama", "Peran", "Status", "Aktivitas Terakhir", "Aksi"], [
@@ -513,7 +513,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
       ]));
     }
     if (route === "profil") {
-      return panel("Profil saya", "Informasi akun demo dan jabatan aktif.", '<div class="profile-detail-grid"><div class="profile-detail-avatar">AP</div><div><span class="stat-label">NAMA LENGKAP</span><h3>Andi Pratama</h3><p class="subtitle">Nomor anggota RH-MBR-0001</p></div><div><span class="stat-label">UNIT ORGANISASI</span><strong>DPC Jember</strong></div><div><span class="stat-label">JABATAN AKTIF</span><strong>Sekretaris</strong></div><div><span class="stat-label">PERIODE</span><strong>2025–2030</strong></div><div><span class="stat-label">STATUS AKUN</span>' + statusBadge("Aktif") + '</div></div>');
+      return panel("Profil saya", "Informasi akun dan jabatan aktif.", '<div class="profile-detail-grid"><div class="profile-detail-avatar">AP</div><div><span class="stat-label">NAMA LENGKAP</span><h3>Andi Pratama</h3><p class="subtitle">Nomor anggota RH-MBR-0001</p></div><div><span class="stat-label">UNIT ORGANISASI</span><strong>DPC Jember</strong></div><div><span class="stat-label">JABATAN AKTIF</span><strong>Sekretaris</strong></div><div><span class="stat-label">PERIODE</span><strong>2025–2030</strong></div><div><span class="stat-label">STATUS AKUN</span>' + statusBadge("Aktif") + '</div></div>');
     }
     return "";
   }
@@ -532,7 +532,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
   const loginScreen = document.createElement("section");
   loginScreen.id = "loginScreen";
   loginScreen.className = "login-screen";
-  loginScreen.innerHTML = '<div class="login-ambient ambient-one"></div><div class="login-ambient ambient-two"></div><div class="login-shell"><section class="login-brand"><a class="login-logo" href="#" aria-label="REDHUB"><img src="Gemini_Generated_Image_7zhe497zhe497zhe-removebg-preview.png" alt="Logo REDHUB"><span>RED<span>HUB</span><small>TERHUBUNG TERUKUR</small></span></a><div class="login-brand-copy"><p class="login-kicker"><span class="brand-stage-pulse"></span> ORGANIZATION PLATFORM</p><h1>Terhubung dalam struktur.<br><span>Terukur dalam kehadiran.</span></h1><p>Ruang kerja organisasi untuk mengelola pengurus, agenda, dan kehadiran dengan alur yang terstruktur.</p><div class="login-brand-meta"><span>01 / KEANGGOTAAN</span><span>02 / KEHADIRAN</span><span>03 / PELAPORAN</span></div></div><div class="login-brand-footer"><span>REDHUB ORGANIZATION PLATFORM</span><span>SECURE WORKSPACE · DEMO</span></div></section><section class="login-form-side"><div class="login-form-wrap"><div class="login-mobile-brand"><img src="Gemini_Generated_Image_7zhe497zhe497zhe-removebg-preview.png" alt=""><span>RED<span>HUB</span></span></div><p class="section-kicker">SELAMAT DATANG KEMBALI</p><h2>Masuk ke REDHUB</h2><p class="login-intro">Pilih peran untuk melihat alur dan tampilan dashboard yang sesuai.</p><form id="demoLoginForm"><label class="field-label" for="loginEmail">Email</label><input class="demo-input" id="loginEmail" name="email" type="email" placeholder="nama@organisasi.id" autocomplete="username" required><label class="field-label" for="loginPassword">Kata sandi</label><div class="password-wrap"><input class="demo-input" id="loginPassword" name="password" type="password" placeholder="Masukkan kata sandi" autocomplete="current-password" required><button type="button" class="password-toggle" data-action="toggle-password" aria-label="Tampilkan kata sandi">Lihat</button></div><label class="field-label" for="loginRole">Masuk sebagai</label><select class="demo-input" id="loginRole" name="role"><option value="super_admin">Super Admin</option><option value="admin">Admin Kesekretariatan</option><option value="pengurus">Pengurus</option></select><button class="button-primary login-submit" type="submit">Masuk ke Workspace <span>→</span></button><div class="login-divider"><span>ATAU COBA CEPAT</span></div><div class="quick-role-grid"><button type="button" data-role-login="super_admin"><span class="quick-role-icon">S</span><span><b>Super Admin</b><small>Kontrol platform</small></span><span class="quick-arrow">↗</span></button><button type="button" data-role-login="admin"><span class="quick-role-icon">A</span><span><b>Admin</b><small>Operasional</small></span><span class="quick-arrow">↗</span></button><button type="button" data-role-login="pengurus"><span class="quick-role-icon">P</span><span><b>Pengurus</b><small>Portal pribadi</small></span><span class="quick-arrow">↗</span></button></div><p class="login-demo-note"><span class="online-dot"></span> Mode demo lokal · Tidak terhubung ke akun produksi</p></form><p class="login-copyright">© REDHUB · Terhubung &amp; Terukur</p></div></section></div>';
+  loginScreen.innerHTML = '<div class="login-ambient ambient-one"></div><div class="login-ambient ambient-two"></div><div class="login-shell"><section class="login-brand"><a class="login-logo" href="#" aria-label="REDHUB"><img src="Gemini_Generated_Image_7zhe497zhe497zhe-removebg-preview.png" alt="Logo REDHUB"><span>RED<span>HUB</span><small>TERHUBUNG TERUKUR</small></span></a><div class="login-brand-copy"><p class="login-kicker"><span class="brand-stage-pulse"></span> ORGANIZATION PLATFORM</p><h1>Terhubung dalam struktur.<br><span>Terukur dalam kehadiran.</span></h1><p>Kelola struktur organisasi, agenda, dan kehadiran melalui satu ruang kerja yang terintegrasi.</p><div class="login-brand-meta"><span>01 / KEANGGOTAAN</span><span>02 / KEHADIRAN</span><span>03 / PELAPORAN</span></div></div><div class="login-brand-footer"><span>REDHUB ORGANIZATION PLATFORM</span><span>ORGANIZATION WORKSPACE</span></div></section><section class="login-form-side"><div class="login-form-wrap"><div class="login-mobile-brand"><img src="Gemini_Generated_Image_7zhe497zhe497zhe-removebg-preview.png" alt=""><span>RED<span>HUB</span></span></div><p class="section-kicker">SELAMAT DATANG</p><h2>Masuk ke REDHUB</h2><p class="login-intro">Masuk menggunakan akun organisasi Anda untuk melanjutkan.</p><form id="demoLoginForm"><label class="field-label" for="loginEmail">Email</label><input class="demo-input" id="loginEmail" name="email" type="email" placeholder="nama@organisasi.id" autocomplete="username" required><label class="field-label" for="loginPassword">Kata sandi</label><div class="password-wrap"><input class="demo-input" id="loginPassword" name="password" type="password" placeholder="Masukkan kata sandi" autocomplete="current-password" required></div><button class="button-primary login-submit" type="submit">Masuk <span>→</span></button></form><p class="login-copyright">© REDHUB · Terhubung &amp; Terukur</p></div></section></div>';
   body.insertBefore(loginScreen, body.firstChild);
   body.classList.add("auth-required");
 
@@ -549,16 +549,16 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
       const card = bottom.querySelector(".workspace-card");
       if (card) {
         card.querySelector("strong").textContent = roleLabels[currentRole];
-        card.querySelector("small").textContent = "Mode demo lokal";
+        card.querySelector("small").textContent = "Ruang kerja organisasi";
       }
       const footer = bottom.querySelector(".sidebar-footer span:last-child");
-      if (footer) footer.innerHTML = 'REDHUB <small>ROLE-BASED DEMO · V13</small>';
+      if (footer) footer.innerHTML = 'REDHUB <small>ORGANIZATION PLATFORM</small>';
     }
   }
   function updateProfile() {
     const profile = document.querySelector(".profile");
     if (!profile) return;
-    profile.innerHTML = '<div class="avatar">' + (currentRole === "super_admin" ? "S" : currentRole === "admin" ? "A" : "P") + '</div><div class="profile-copy"><strong>' + roleLabels[currentRole] + '</strong><small>' + (currentRole === "pengurus" ? "Andi Pratama" : "Workspace demo") + '</small></div><button type="button" class="profile-logout" data-action="logout" aria-label="Keluar dari demo">↪</button>';
+    profile.innerHTML = '<div class="avatar">' + (currentRole === "super_admin" ? "S" : currentRole === "admin" ? "A" : "P") + '</div><div class="profile-copy"><strong>' + roleLabels[currentRole] + '</strong><small>' + (currentRole === "pengurus" ? "Andi Pratama" : "Akses organisasi") + '</small></div><button type="button" class="profile-logout" data-action="logout" aria-label="Keluar dari akun">↪</button>';
   }
   function setHeader(route) {
     const meta = pageMeta[route] || pageMeta.dashboard;
@@ -596,7 +596,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
       const panelHeading = membersPanel.querySelector(".panel-heading h2");
       const panelSubtitle = membersPanel.querySelector(".panel-heading .subtitle");
       if (panelHeading) panelHeading.textContent = "Pengurus & Anggota";
-      if (panelSubtitle) panelSubtitle.textContent = "Kelola identitas, unit, jabatan, dan status kehadiran pada data demo.";
+      if (panelSubtitle) panelSubtitle.textContent = "Kelola identitas, unit, jabatan, dan status kehadiran anggota.";
     }
     navList.querySelectorAll(".nav-item").forEach(function (link) {
       const active = link.dataset.page === route;
@@ -627,21 +627,13 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     event.preventDefault();
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value;
-    const role = document.getElementById("loginRole").value;
+    const accountName = email.split("@")[0].toLowerCase();
+    const role = accountName.startsWith("superadmin") ? "super_admin" : accountName.startsWith("admin") ? "admin" : "pengurus";
     if (!email || !password) {
       toast("Lengkapi email dan kata sandi untuk melanjutkan.", "error");
       return;
     }
     login(role);
-  });
-  loginScreen.querySelectorAll("[data-role-login]").forEach(function (buttonEl) {
-    buttonEl.addEventListener("click", function () {
-      const role = buttonEl.dataset.roleLogin;
-      document.getElementById("loginRole").value = role;
-      document.getElementById("loginEmail").value = role === "super_admin" ? "superadmin@redhub.demo" : role === "admin" ? "admin@redhub.demo" : "pengurus@redhub.demo";
-      document.getElementById("loginPassword").value = "demo123";
-      login(role);
-    });
   });
   navList.addEventListener("click", function (event) {
     const link = event.target.closest("[data-page]");
@@ -725,7 +717,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     mobileToggle.setAttribute("aria-label", opened ? "Tutup navigasi" : "Buka navigasi");
   });
   const profileEl = document.querySelector(".profile");
-  if (profileEl) profileEl.setAttribute("aria-label", "Akun demo");
+  if (profileEl) profileEl.setAttribute("aria-label", "Akun REDHUB");
 
   let savedRole = null;
   try { savedRole = localStorage.getItem(ROLE_KEY); } catch (error) {}

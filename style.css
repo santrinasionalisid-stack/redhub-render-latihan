@@ -1689,3 +1689,47 @@ body.auth-required > .workspace { display: none !important; }
   .sidebar-section { flex: 1 1 auto; }
   .nav-list { max-height: calc(100vh - 235px); }
 }
+
+
+/* V14 — refined authentication typography and spacing */
+.login-form-wrap > .section-kicker {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.45px;
+}
+.login-form-wrap > h2 {
+  letter-spacing: -1.25px;
+  line-height: 1.2;
+}
+.login-intro {
+  max-width: 340px;
+  margin: 12px 0 30px;
+  font-size: 13px;
+  line-height: 1.75;
+}
+.login-form-wrap .field-label {
+  margin: 19px 0 8px;
+  font-size: 12px;
+  letter-spacing: .05px;
+}
+.login-form-wrap .demo-input {
+  min-height: 50px;
+  border-radius: 11px;
+  font-size: 13px;
+}
+.login-submit {
+  min-height: 51px;
+  margin-top: 27px;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+.login-copyright {
+  margin-top: 35px;
+  font-size: 10px;
+  letter-spacing: .1px;
+}
+@media (max-width: 720px) {
+  .login-intro { margin-bottom: 27px; font-size: 12px; }
+  .login-form-wrap .demo-input { min-height: 49px; }
+}
