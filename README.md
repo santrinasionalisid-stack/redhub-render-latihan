@@ -98,3 +98,20 @@ Buka `index.html` di browser modern. Tidak memerlukan proses build atau dependen
 - Memperbarui judul halaman dan metadata deskripsi.
 - Pada prototype ini, peran workspace dipetakan secara lokal dari nama email (superadmin…, admin…, atau akun lain). Ini bukan autentikasi server; sistem produksi tidak terhubung atau diubah.
 - Perubahan dibatasi pada repository latihan ini. Repository REDHUB produksi tetap tidak disentuh.
+
+
+## V15 — Professional UI system and responsive polish
+
+- Menyamakan detail interaksi pada tombol, input, status, tabel, dan panel agar seluruh workspace terasa berasal dari satu design system.
+- Memperhalus tabel operasional, termasuk hover state, header yang tetap terbaca saat area tabel digulir, serta respons tombol aksi pada layar kecil.
+- Memperkuat focus state keyboard, reduced-motion support, dan state tombol nonaktif.
+- Memperbaiki navigasi mobile: drawer sekarang menutup ketika pengguna mengetuk area di luar navigasi, dan status `aria-expanded` selalu diperbarui.
+- Setelah logout demo, fokus kembali ke kolom email untuk mempercepat alur masuk ulang.
+- Tidak mengubah skema peran, tampilan inti V14, CRUD anggota, penyimpanan lokal, atau integrasi produksi.
+- Repository produksi `organisasi-attendance` tidak disentuh.
+
+### Verifikasi V15
+
+- Perubahan dibatasi pada CSS polish dan perbaikan interaksi navigasi mobile/logout.
+- Pemeriksaan syntax dan rendering pada browser aktual tetap harus dilakukan setelah deployment.
+- Status visual: menunggu QA pada deployment; tidak dinyatakan PASS sebelum ditinjau.
