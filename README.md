@@ -84,7 +84,7 @@ Buka `index.html` di browser modern. Tidak memerlukan proses build atau dependen
 
 ### Verifikasi V13
 
-- JavaScript syntax: pending verification.
-- Render aktual di Render: perlu diverifikasi setelah deployment.
-- QA viewport: 360, 390, 430, 768, 1024, 1366, 1440 px perlu ditinjau.
+- JavaScript syntax parse: PASS (Node-compatible parser check).
+- Render aktual di Render: belum diverifikasi; wajib ditinjau setelah deployment.
+- CSS brace balance: PASS. QA viewport 360, 390, 430, 768, 1024, 1366, 1440 px masih perlu ditinjau.
 - Status UI: READY FOR USER REVIEW setelah hasil aktual dirender; bukan visual PASS.
