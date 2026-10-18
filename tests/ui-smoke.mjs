@@ -99,7 +99,20 @@ try {
       await toggle.click();
       assert.equal(await page.locator("body").evaluate(el => el.classList.contains("mobile-nav-open")), true);
       assert.equal(await toggle.getAttribute("aria-expanded"), "true");
-      await page.locator("main").click({ position: { x: 10, y: 10 } });
+      // Tap a real viewport coordinate outside the open drawer. Clicking main at
+      // (10, 10) can target the covered area underneath the sidebar and time out.
+      const viewport = page.viewportSize();
+      const sidebarBounds = await page.locator(".sidebar").boundingBox();
+      assert(sidebarBounds, "Sidebar must be visible when the mobile navigation is open");
+      const outsideX = Math.min(
+        viewport.width - 4,
+        Math.ceil(sidebarBounds.x + sidebarBounds.width + 8)
+      );
+      assert(
+        outsideX > sidebarBounds.x + sidebarBounds.width,
+        "Expected a tappable area outside the mobile sidebar"
+      );
+      await page.mouse.click(outsideX, Math.min(160, viewport.height - 4));
       assert.equal(await page.locator("body").evaluate(el => el.classList.contains("mobile-nav-open")), false);
       assert.equal(await toggle.getAttribute("aria-expanded"), "false");
       assert.deepEqual(pageErrors, [], "Browser JavaScript errors detected");
