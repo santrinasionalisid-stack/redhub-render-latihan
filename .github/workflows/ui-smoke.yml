@@ -1,0 +1,37 @@
+name: REDHUB UI smoke tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Deployed REDHUB URL to test"
+        required: true
+        default: "https://redhub-render-latihan.onrender.com"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    name: Browser smoke tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Playwright
+        run: npm install --no-save playwright
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Test deployed UI
+        env:
+          BASE_URL: ${{ inputs.base_url }}
+        run: node tests/ui-smoke.mjs

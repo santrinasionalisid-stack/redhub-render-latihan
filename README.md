@@ -115,3 +115,19 @@ Buka `index.html` di browser modern. Tidak memerlukan proses build atau dependen
 - Perubahan dibatasi pada CSS polish dan perbaikan interaksi navigasi mobile/logout.
 - Pemeriksaan syntax dan rendering pada browser aktual tetap harus dilakukan setelah deployment.
 - Status visual: menunggu QA pada deployment; tidak dinyatakan PASS sebelum ditinjau.
+
+
+## Free browser smoke tests (Playwright)
+
+This repository includes a manually triggered Playwright smoke-test workflow. It runs Chromium on a GitHub-hosted runner and does not use TinyFish or a paid browser-agent service.
+
+### Run against the deployed prototype
+
+1. Open **Actions → REDHUB UI smoke tests** in GitHub.
+2. Select **Run workflow**.
+3. Keep the default URL or enter another deployed REDHUB practice URL.
+4. Review the run log. The test checks the minimal V14 login, role-specific navigation for Super Admin/Admin/Pengurus, browser JavaScript errors, and the mobile navigation open/close interaction.
+
+The workflow is intentionally manual so tests do not race the Render deployment. A passing run means the checked smoke scenarios passed for that deployment; it is not a complete visual-design audit and does not test production authentication.
+
+Local prerequisite: Node.js and Chromium. Install Playwright with `npm install --no-save playwright`, install its browser with `npx playwright install chromium`, then run `BASE_URL=https://redhub-render-latihan.onrender.com node tests/ui-smoke.mjs`.
