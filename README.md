@@ -71,3 +71,20 @@ Buka `index.html` di browser modern. Tidak memerlukan proses build atau dependen
 - Memperhalus fokus input, transisi interaksi, keterbacaan badge, dan scrollbar tabel.
 - Perubahan hanya pada CSS; JavaScript CRUD, localStorage, pencarian/filter, statistik, analitik, dan ekspor CSV tidak diubah.
 - Validasi akhir tetap memerlukan pemeriksaan visual pada deployment Render di desktop, tablet, dan ponsel.
+
+
+## V13 — Role-based REDHUB workspaces
+
+- Menambahkan halaman login demo dengan pilihan peran Super Admin, Admin Kesekretariatan, dan Pengurus.
+- Navigasi dan halaman dibatasi berdasarkan peran untuk simulasi UI; menu Kelola Admin, Pengaturan WhatsApp, Audit Log, dan Konfigurasi Sistem hanya tampil untuk Super Admin.
+- Menambahkan pratinjau halaman Struktur Organisasi, Rapat/Kegiatan, Scanner QR, Undangan & WhatsApp, Absensi, Laporan, portal Pengurus, QR Saya, Riwayat Kehadiran, Rapor, Profil, serta halaman administrasi Super Admin.
+- Mempertahankan tampilan V12 sebagai basis visual dan menambahkan shell navigasi drawer serta layout mobile-first.
+- Login, data, scan QR, pengiriman WhatsApp, dan konfigurasi pada versi ini adalah simulasi lokal; tidak terhubung ke backend, Firebase, atau akun produksi.
+- Perubahan dilakukan pada repository latihan ini saja; `organisasi-attendance` tidak diubah.
+
+### Verifikasi V13
+
+- JavaScript syntax parse: PASS (Node-compatible parser check).
+- Render aktual di Render: belum diverifikasi; wajib ditinjau setelah deployment.
+- CSS brace balance: PASS. QA viewport 360, 390, 430, 768, 1024, 1366, 1440 px masih perlu ditinjau.
+- Status UI: READY FOR USER REVIEW setelah hasil aktual dirender; bukan visual PASS.
