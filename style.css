@@ -1677,3 +1677,15 @@ body.auth-required > .workspace { display: none !important; }
   .generated-page { display: block !important; }
   .panel { box-shadow: none; }
 }
+
+
+/* V13 follow-up — keep long Super Admin navigation inside the viewport. */
+.sidebar { overflow: hidden; }
+.sidebar-section { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+.nav-list { min-height: 0; max-height: calc(100vh - 270px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #48484d transparent; }
+.nav-list::-webkit-scrollbar { width: 4px; }
+.nav-list::-webkit-scrollbar-thumb { border-radius: 8px; background: #48484d; }
+@media (max-width: 900px) {
+  .sidebar-section { flex: 1 1 auto; }
+  .nav-list { max-height: calc(100vh - 235px); }
+}
