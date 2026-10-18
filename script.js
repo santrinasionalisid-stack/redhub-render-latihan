@@ -622,6 +622,8 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     try { localStorage.removeItem(ROLE_KEY); } catch (error) {}
     showLogin();
     window.scrollTo({ top: 0, behavior: "smooth" });
+    const emailField = document.getElementById("loginEmail");
+    if (emailField) emailField.focus();
   }
   document.getElementById("demoLoginForm").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -709,12 +711,20 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
   mobileToggle.className = "mobile-nav-toggle";
   mobileToggle.type = "button";
   mobileToggle.setAttribute("aria-label", "Buka navigasi");
+  mobileToggle.setAttribute("aria-expanded", "false");
   mobileToggle.innerHTML = '<span></span><span></span><span></span>';
   topbar.insertBefore(mobileToggle, topbar.firstChild);
   mobileToggle.addEventListener("click", function () {
     const opened = body.classList.toggle("mobile-nav-open");
     mobileToggle.setAttribute("aria-expanded", String(opened));
     mobileToggle.setAttribute("aria-label", opened ? "Tutup navigasi" : "Buka navigasi");
+  });
+  document.addEventListener("click", function (event) {
+    if (!body.classList.contains("mobile-nav-open")) return;
+    if (event.target.closest(".sidebar") || event.target.closest(".mobile-nav-toggle")) return;
+    body.classList.remove("mobile-nav-open");
+    mobileToggle.setAttribute("aria-expanded", "false");
+    mobileToggle.setAttribute("aria-label", "Buka navigasi");
   });
   const profileEl = document.querySelector(".profile");
   if (profileEl) profileEl.setAttribute("aria-label", "Akun REDHUB");
