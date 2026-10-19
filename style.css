@@ -1994,3 +1994,38 @@ input::placeholder, textarea::placeholder {
   .member-id-layout > .analytics-card { padding: 18px 16px; }
   .member-id-layout .step-list li { font-size: 12px; align-items: flex-start; }
 }
+
+/* V16.6 — mobile login retains the desktop REDHUB brand identity. */
+@media (max-width: 900px) {
+  .login-screen { background: #111114; padding: 0; }
+  .login-shell { display: flex; flex-direction: column; min-height: 100svh; background: #f8f8fa; box-shadow: none; }
+  .login-brand {
+    display: flex; flex: 0 0 auto; min-height: 0; padding: 30px 24px 28px;
+    background: radial-gradient(ellipse at 95% 5%, rgb(217 4 41 / 35%), transparent 55%), linear-gradient(145deg, #19191c, #111113 80%);
+  }
+  .login-brand::before { width: 260px; height: 260px; right: -125px; bottom: -160px; }
+  .login-logo { font-size: 23px; gap: 11px; }
+  .login-logo img { width: 46px; height: 46px; }
+  .login-brand-copy { margin: 26px 0 0; }
+  .login-kicker { font-size: 9px; margin-bottom: 10px; letter-spacing: 1.2px; }
+  .login-brand-copy h1 { font-size: clamp(23px, 5.5vw, 31px); line-height: 1.24; letter-spacing: -.8px; }
+  .login-brand-copy > p:not(.login-kicker) { font-size: 12px; line-height: 1.6; margin-top: 10px; max-width: 36ch; }
+  .login-brand-meta, .login-brand-footer { display: none; }
+  .login-form-side { flex: 1 0 auto; align-items: start; padding: 28px 24px 24px; background: #f8f8fa; }
+  .login-form-wrap { margin: 0 auto; max-width: 430px; }
+  .login-mobile-brand { display: none; }
+  .login-form-wrap > .section-kicker { font-size: 10px; margin-bottom: 8px; }
+  .login-form-wrap > h2 { font-size: 27px; line-height: 1.23; letter-spacing: -.8px; }
+  .login-intro { max-width: 33ch; margin: 9px 0 20px; font-size: 12px; line-height: 1.55; }
+  .login-form-wrap .field-label { margin: 16px 0 7px; font-size: 12px; }
+  .login-form-wrap .demo-input { min-height: 52px; font-size: 16px; border-radius: 11px; }
+  .login-submit { min-height: 52px; margin-top: 24px; font-size: 14px; }
+  .login-copyright { margin-top: 27px; font-size: 10px; }
+  :root[data-theme="dark"] .login-form-side { background: #1d2026; }
+}
+@media (max-width: 370px) {
+  .login-brand { padding: 22px 19px 20px; }
+  .login-brand-copy { margin-top: 18px; }
+  .login-brand-copy h1 { font-size: 22px; }
+  .login-form-side { padding: 22px 19px; }
+}
