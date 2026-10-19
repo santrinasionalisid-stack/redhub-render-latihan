@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - fix/v16-1-mobile-visual-audit
+      - fix/v16-2-mobile-vertical-navigation
   workflow_dispatch:
     inputs:
       base_url:
