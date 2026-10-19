@@ -268,6 +268,7 @@ try {
       await page.locator('[data-action="logout-cancel"]').click();
       assert.equal(await confirm.isVisible(), false, "Cancellation must close confirmation");
       assert.equal(await page.locator(".login-screen").isVisible(), false, "Cancel must preserve login session");
+      if (!await drawerLogout.evaluate(el => el.getBoundingClientRect().left >= 0)) await menuToggle.click();
       await drawerLogout.click();
       await page.locator('[data-action="logout-accept"]').click();
       assert(await page.locator(".login-screen").isVisible(), "Confirmed logout must open login");
