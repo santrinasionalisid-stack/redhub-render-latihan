@@ -615,7 +615,8 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     loginScreen.hidden = true;
     renderNav();
     goToPage("dashboard");
-    toast("Workspace " + roleLabels[role] + " siap digunakan.", "success");
+    // Opening the workspace already confirms successful demo sign-in;
+    // avoid a redundant toast covering mobile dashboard content.
   }
   function logout() {
     currentRole = null;
