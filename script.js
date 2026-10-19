@@ -459,54 +459,54 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
         ["Badan", "Unit khusus", "5 unit · K/S/B", statusBadge("Aktif"), '<button class="button-small button-edit" data-action="detail-struktur">Lihat unit</button>'],
         ["Sayap", "Unit organisasi", "4 unit · K/S/B", statusBadge("Aktif"), '<button class="button-small button-edit" data-action="detail-struktur">Lihat unit</button>']
       ];
-      return panel("Struktur organisasi", "Hierarki unit dan komposisi pengurus contoh.", table(["Unit", "Cakupan", "Komposisi", "Status", "Aksi"], rows), button("＋ Tambah Unit", "new-unit"));
+      return panel("Struktur organisasi", "Struktur unit organisasi dan susunan kepengurusan.", table(["Unit", "Cakupan", "Komposisi", "Status", "Aksi"], rows), button("＋ Tambah Unit", "new-unit"));
     }
     if (route === "rapat" || route === "rapat-saya") {
       const rows = demoMeetings.map(function (m, i) {
         return [escapeHtml(m.title), escapeHtml(m.date), escapeHtml(m.unit), statusBadge(m.status), role === "pengurus" ? '<button class="button-small button-edit" data-action="meeting-detail">Detail</button>' : '<button class="button-small button-edit" data-action="meeting-detail">Kelola</button>'];
       });
-      return panel(route === "rapat-saya" ? "Agenda untuk Anda" : "Daftar rapat / kegiatan", route === "rapat-saya" ? "Agenda demo yang ditujukan kepada akun pengurus." : "Daftar agenda contoh; status dan peserta bukan data produksi.", table(["Agenda", "Jadwal", "Peserta", "Status", "Aksi"], rows), role === "pengurus" ? "" : button("＋ Buat Rapat", "new-meeting"));
+      return panel(route === "rapat-saya" ? "Agenda untuk Anda" : "Daftar rapat / kegiatan", route === "rapat-saya" ? "Agenda rapat dan kegiatan yang tercantum untuk akun Anda." : "Daftar agenda beserta jadwal dan status pelaksanaannya.", table(["Agenda", "Jadwal", "Peserta", "Status", "Aksi"], rows), role === "pengurus" ? "" : button("＋ Buat Rapat", "new-meeting"));
     }
     if (route === "scanner") {
-      return '<div class="scanner-layout"><section class="scanner-card"><div class="scanner-frame"><div class="scanner-corner tl"></div><div class="scanner-corner tr"></div><div class="scanner-corner bl"></div><div class="scanner-corner br"></div><div class="scanner-scanline"></div><div class="scanner-center-icon">' + svgIcon("scan-line") + '</div></div><p class="scanner-kicker">SCANNER CHECK-IN</p><h2>Validasi QR anggota</h2><p class="subtitle">Simulasi scanner. Kamera dan backend produksi tidak terhubung.</p><label class="field-label" for="scanMemberId">ID anggota demo</label><input id="scanMemberId" class="demo-input" type="text" placeholder="Contoh: MBR-0001"><button class="button-primary" type="button" data-action="scan-member">Validasi Anggota</button></section><section class="analytics-card"><div class="analytics-card-heading"><div><h3>Alur check-in</h3><p>Validasi sebelum absensi dicatat</p></div></div><ol class="step-list"><li><b>01</b><span>Scan QR anggota</span></li><li><b>02</b><span>Pastikan identitas dan rapat sesuai</span></li><li><b>03</b><span>Catat kehadiran dengan status demo</span></li></ol><p class="demo-note">Data hanya simulasi lokal dan tidak mengubah absensi produksi.</p></section></div>';
+      return '<div class="scanner-layout"><section class="scanner-card"><div class="scanner-frame"><div class="scanner-corner tl"></div><div class="scanner-corner tr"></div><div class="scanner-corner bl"></div><div class="scanner-corner br"></div><div class="scanner-scanline"></div><div class="scanner-center-icon">' + svgIcon("scan-line") + '</div></div><p class="scanner-kicker">SCANNER CHECK-IN</p><h2>Validasi QR anggota</h2><p class="subtitle">Pemindaian kamera belum tersedia. Gunakan ID anggota untuk pemeriksaan identitas.</p><label class="field-label" for="scanMemberId">ID anggota</label><input id="scanMemberId" class="demo-input" type="text" placeholder="Contoh: MBR-0001"><button class="button-primary" type="button" data-action="scan-member">Validasi Anggota</button></section><section class="analytics-card"><div class="analytics-card-heading"><div><h3>Alur check-in</h3><p>Validasi sebelum absensi dicatat</p></div></div><ol class="step-list"><li><b>01</b><span>Scan QR anggota</span></li><li><b>02</b><span>Pastikan identitas dan rapat sesuai</span></li><li><b>03</b><span>Periksa status kehadiran anggota</span></li></ol><p class="demo-note">Pencatatan kehadiran ke server belum tersedia di halaman ini.</p></section></div>';
     }
     if (route === "undangan") {
-      return panel("Undangan dan distribusi", "Alur contoh untuk PDF undangan dan broadcast WhatsApp.", '<div class="generated-content-grid"><article class="analytics-card"><span class="stat-label">DOKUMEN UNDANGAN</span><h3>Rapat Koordinasi DPC</h3><p class="subtitle">PDF undangan belum diunggah pada simulasi ini.</p><label class="upload-zone"><span class="upload-symbol">↑</span><strong>Pilih PDF undangan</strong><small>PDF · maksimal mengikuti konfigurasi demo</small><input id="invitationPdf" type="file" accept="application/pdf"></label><p id="pdfName" class="form-hint">Belum ada berkas dipilih.</p></article><article class="analytics-card"><span class="stat-label">RINGKASAN DISTRIBUSI</span><div class="stat-number">31</div><p class="subtitle">Target demo untuk agenda terpilih</p><div class="distribution-row"><span>Siap dikirim</span><strong id="distributionReady">31 penerima</strong></div><div class="distribution-row"><span>Status gateway</span><strong>Simulasi saja</strong></div><button class="button-primary" type="button" data-action="send-invitation">Simulasikan Broadcast</button><p class="demo-note">Tidak ada pesan WhatsApp yang benar-benar dikirim.</p></article></div>');
+      return panel("Undangan dan distribusi", "Siapkan dokumen undangan dan periksa daftar penerima sebelum pengiriman.", '<div class="generated-content-grid"><article class="analytics-card"><span class="stat-label">DOKUMEN UNDANGAN</span><h3>Rapat Koordinasi DPC</h3><p class="subtitle">Belum ada dokumen undangan yang dipilih.</p><label class="upload-zone"><span class="upload-symbol">↑</span><strong>Pilih PDF undangan</strong><small>Format berkas: PDF</small><input id="invitationPdf" type="file" accept="application/pdf"></label><p id="pdfName" class="form-hint">Belum ada berkas dipilih.</p></article><article class="analytics-card"><span class="stat-label">RINGKASAN DISTRIBUSI</span><div class="stat-number">31</div><p class="subtitle">Daftar penerima yang tercantum</p><div class="distribution-row"><span>Siap dikirim</span><strong id="distributionReady">31 penerima</strong></div><div class="distribution-row"><span>Status gateway</span><strong>Belum terhubung</strong></div><button class="button-primary" type="button" data-action="send-invitation">Periksa Pengiriman</button><p class="demo-note">Pengiriman WhatsApp belum tersedia dari halaman ini.</p></article></div>');
     }
     if (route === "absensi") {
       const rows = demoAttendance.map(function (m, i) {
         return [escapeHtml(m[0]), escapeHtml(m[1]), escapeHtml(m[2]), '<span class="status ' + (m[3] === "Hadir" ? "present" : "absent") + '" data-status-cell>' + m[3] + '</span>', '<button class="button-small button-edit" data-action="toggle-attendance" data-row="' + i + '">Ubah status</button>'];
       });
-      return panel("Monitoring absensi", "Pantau kehadiran peserta dan lakukan koreksi sesuai kebutuhan.", '<div class="table-toolbar"><div class="table-caption"><strong>Peserta rapat</strong><span class="data-source-pill"><span class="online-dot"></span> Data demo</span></div><label class="search-box" for="attendanceSearch"><input id="attendanceSearch" type="search" placeholder="Cari nama peserta..." aria-label="Cari nama peserta"></label></div>' + table(["Nama", "Unit", "Jabatan", "Kehadiran", "Aksi"], rows) + '<p class="demo-note">Koreksi pada halaman ini hanya mengubah tampilan sesi, tidak tersimpan ke server.</p>', button("Ekspor CSV", "export-attendance", true));
+      return panel("Monitoring absensi", "Pantau kehadiran peserta dan lakukan koreksi sesuai kebutuhan.", '<div class="table-toolbar"><div class="table-caption"><strong>Peserta rapat</strong><span class="data-source-pill"><span class="online-dot"></span> Data anggota</span></div><label class="search-box" for="attendanceSearch"><input id="attendanceSearch" type="search" placeholder="Cari nama peserta..." aria-label="Cari nama peserta"></label></div>' + table(["Nama", "Unit", "Jabatan", "Kehadiran", "Aksi"], rows) + '<p class="demo-note">Perubahan pada halaman ini belum tersimpan ke server.</p>', button("Ekspor CSV", "export-attendance", true));
     }
     if (route === "laporan" || route === "rapor-saya") {
       const personal = role === "pengurus";
-      return '<div class="stats generated-stats">' + metricCard(personal ? "KEHADIRAN PRIBADI" : "TINGKAT KEHADIRAN", personal ? "92%" : "67,2%", personal ? "11 dari 12 agenda" : "86 dari 128 anggota", "stat-present") + metricCard(personal ? "HADIR" : "TOTAL ANGGOTA", personal ? "11" : "128", personal ? "Dalam periode aktif" : "Seluruh unit demo", "") + metricCard(personal ? "IZIN" : "BELUM ABSEN", personal ? "1" : "42", personal ? "Tercatat pada agenda" : "Perlu ditindaklanjuti", "stat-absent") + '</div>' + panel(personal ? "Rapor kehadiran saya" : "Ringkasan laporan", "Ringkasan kehadiran untuk periode yang dipilih.", '<div class="report-bars"><div><span>September</span><i style="--bar:82%"></i><b>82%</b></div><div><span>Oktober</span><i style="--bar:92%"></i><b>92%</b></div><div><span>November</span><i style="--bar:76%"></i><b>76%</b></div></div><p class="demo-note">Grafik contoh untuk pratinjau UI, bukan tren historis produksi.</p>', button("Ekspor CSV", "export-report", true).replace("data-action=", "data-mobile-personal-report-action data-action=") + button("Cetak Laporan", "print-report", false).replace("data-action=", "data-mobile-personal-report-action data-action="));
+      return '<div class="stats generated-stats">' + metricCard(personal ? "KEHADIRAN PRIBADI" : "TINGKAT KEHADIRAN", personal ? "92%" : "67,2%", personal ? "11 dari 12 agenda" : "86 dari 128 anggota", "stat-present") + metricCard(personal ? "HADIR" : "TOTAL ANGGOTA", personal ? "11" : "128", personal ? "Dalam periode aktif" : "Seluruh unit organisasi", "") + metricCard(personal ? "IZIN" : "BELUM ABSEN", personal ? "1" : "42", personal ? "Tercatat pada agenda" : "Perlu ditindaklanjuti", "stat-absent") + '</div>' + panel(personal ? "Rapor kehadiran saya" : "Ringkasan laporan", "Ringkasan kehadiran untuk periode yang dipilih.", '<div class="report-bars"><div><span>September</span><i style="--bar:82%"></i><b>82%</b></div><div><span>Oktober</span><i style="--bar:92%"></i><b>92%</b></div><div><span>November</span><i style="--bar:76%"></i><b>76%</b></div></div><p class="demo-note">Grafik belum terhubung dengan riwayat kehadiran terverifikasi.</p>', button("Ekspor CSV", "export-report", true).replace("data-action=", "data-mobile-personal-report-action data-action=") + button("Cetak Laporan", "print-report", false).replace("data-action=", "data-mobile-personal-report-action data-action="));
     }
     if (route === "admins") {
-      return panel("Akun administratif", "Hanya Super Admin yang melihat halaman ini pada prototype.", table(["Nama", "Peran", "Status", "Aktivitas Terakhir", "Aksi"], [
+      return panel("Akun administratif", "Akses pengelolaan akun administratif untuk Super Admin.", table(["Nama", "Peran", "Status", "Aktivitas Terakhir", "Aksi"], [
         ["Administrator DPC", "Admin Kesekretariatan", statusBadge("Aktif"), "Hari ini · 08.45", '<button class="button-small button-edit" data-action="admin-detail">Kelola</button>'],
         ["Operator Sekretariat", "Admin Kesekretariatan", statusBadge("Aktif"), "Kemarin · 16.20", '<button class="button-small button-edit" data-action="admin-detail">Kelola</button>']
       ]), button("＋ Tambah Admin", "new-admin"));
     }
     if (route === "whatsapp-settings") {
-      return panel("Koneksi WhatsApp", "Panel presentasi konfigurasi; token gateway asli tidak dimuat.", '<div class="settings-form"><label class="field-label" for="gatewayMode">Mode integrasi</label><select class="demo-input" id="gatewayMode"><option>Fonnte Lite · Demo</option><option>Nonaktif</option></select><label class="field-label" for="gatewayToken">Token API</label><input class="demo-input" id="gatewayToken" type="password" value="demo-token-not-connected" readonly><div class="settings-status"><span class="online-dot"></span><div><strong>Mode simulasi</strong><small>Tidak ada kredensial produksi yang tersimpan.</small></div></div><label class="toggle-row"><span><b>Template undangan</b><small>Gunakan template pesan contoh</small></span><input type="checkbox" checked></label><label class="toggle-row"><span><b>Pengingat H-1</b><small>Pratinjau opsi pengingat</small></span><input type="checkbox" checked></label></div>', button("Simpan Preferensi Demo", "save-settings"));
+      return panel("Koneksi WhatsApp", "Panel presentasi konfigurasi; token gateway asli tidak dimuat.", '<div class="settings-form"><label class="field-label" for="gatewayMode">Mode integrasi</label><select class="demo-input" id="gatewayMode"><option>Belum dikonfigurasi</option><option>Nonaktif</option></select><label class="field-label" for="gatewayToken">Token API</label><input class="demo-input" id="gatewayToken" type="password" value="" readonly><div class="settings-status"><span class="online-dot"></span><div><strong>Koneksi belum aktif</strong><small>Kredensial pengiriman belum tersedia.</small></div></div><label class="toggle-row"><span><b>Template undangan</b><small>Gunakan format pesan undangan organisasi</small></span><input type="checkbox" checked></label><label class="toggle-row"><span><b>Pengingat H-1</b><small>Pengingat sebelum jadwal kegiatan</small></span><input type="checkbox" checked></label></div>', button("Simpan Preferensi", "save-settings"));
     }
     if (route === "audit") {
-      return panel("Riwayat aktivitas", "Log ilustrasi untuk menunjukkan keterlacakan operasional.", table(["Waktu", "Pengguna", "Aktivitas", "Hasil"], [
+      return panel("Riwayat aktivitas", "Ringkasan aktivitas yang tercantum pada halaman ini.", table(["Waktu", "Pengguna", "Aktivitas", "Hasil"], [
         ["19 Okt 2026 · 08.45", "Admin Kesekretariatan", "Membuka dashboard", statusBadge("Aktif")],
-        ["18 Okt 2026 · 16.20", "Super Admin", "Memeriksa konfigurasi demo", statusBadge("Aktif")],
+        ["18 Okt 2026 · 16.20", "Super Admin", "Memeriksa konfigurasi", statusBadge("Aktif")],
         ["18 Okt 2026 · 10.05", "Admin Kesekretariatan", "Melihat agenda rapat", statusBadge("Aktif")]
       ]));
     }
     if (route === "konfigurasi") {
-      return panel("Preferensi sistem", "Pengaturan presentasi untuk prototype, bukan konfigurasi server.", '<div class="settings-form"><label class="field-label" for="orgName">Nama organisasi</label><input class="demo-input" id="orgName" value="REDHUB · Organisasi Demo"><label class="field-label" for="term">Periode kepengurusan</label><select class="demo-input" id="term"><option>2025–2030</option><option>2030–2035</option></select><label class="toggle-row"><span><b>Mode kontras tinggi</b><small>Preferensi aksesibilitas demo</small></span><input type="checkbox"></label></div>', button("Simpan Preferensi", "save-settings"));
+      return panel("Preferensi sistem", "Pengaturan di halaman ini belum tersinkronisasi dengan server.", '<div class="settings-form"><label class="field-label" for="orgName">Nama organisasi</label><input class="demo-input" id="orgName" value="REDHUB · Organisasi"><label class="field-label" for="term">Periode kepengurusan</label><select class="demo-input" id="term"><option>2025–2030</option><option>2030–2035</option></select><label class="toggle-row"><span><b>Mode kontras tinggi</b><small>Tingkatkan kontras tampilan</small></span><input type="checkbox"></label></div>', button("Simpan Preferensi", "save-settings"));
     }
     if (route === "qr-saya") {
-      return '<section class="member-id-layout"><article class="member-id-card"><div class="member-id-brand"><span>RED<span>HUB</span></span><small>KARTU IDENTITAS DIGITAL</small></div><div class="member-id-profile"><div class="member-id-avatar">AP</div><div><h2>Andi Pratama</h2><p>Sekretaris · DPC Jember</p><span class="status present">Pengurus Aktif</span></div></div><div class="demo-qr" role="img" aria-label="Ilustrasi QR demo"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><strong class="member-id-code">RH-MBR-0001</strong><p class="demo-note">QR ilustrasi ini bukan token identitas yang dapat dipindai di sistem produksi.</p></article><aside class="analytics-card"><h3>Petunjuk check-in</h3><p class="subtitle">Tunjukkan QR kepada petugas saat hadir pada rapat.</p><ol class="step-list"><li><b>01</b><span>Buka halaman QR Saya.</span></li><li><b>02</b><span>Tunjukkan QR pada petugas scanner.</span></li><li><b>03</b><span>Pastikan status kehadiran telah tercatat.</span></li></ol></aside></section>';
+      return '<section class="member-id-layout"><article class="member-id-card"><div class="member-id-brand"><span>RED<span>HUB</span></span><small>KARTU IDENTITAS DIGITAL</small></div><div class="member-id-profile"><div class="member-id-avatar">AP</div><div><h2>Andi Pratama</h2><p>Sekretaris · DPC Jember</p><span class="status present">Pengurus Aktif</span></div></div><div class="demo-qr" role="img" aria-label="QR identitas belum aktif"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><strong class="member-id-code">RH-MBR-0001</strong><p class="demo-note">QR identitas untuk check-in belum tersedia. Jangan gunakan gambar ini untuk absensi.</p></article><aside class="analytics-card"><h3>Petunjuk check-in</h3><p class="subtitle">Tunjukkan QR kepada petugas saat hadir pada rapat.</p><ol class="step-list"><li><b>01</b><span>Buka halaman QR Saya.</span></li><li><b>02</b><span>Tunjukkan QR pada petugas scanner.</span></li><li><b>03</b><span>Pastikan status kehadiran telah tercatat.</span></li></ol></aside></section>';
     }
     if (route === "riwayat") {
-      return panel("Riwayat kehadiran pribadi", "Contoh histori yang hanya terlihat oleh akun pengurus.", table(["Tanggal", "Agenda", "Unit", "Status"], [
+      return panel("Riwayat kehadiran pribadi", "Riwayat kehadiran yang tercantum untuk akun Anda.", table(["Tanggal", "Agenda", "Unit", "Status"], [
         ["12 Okt 2026", "Rapat Koordinasi", "DPC", statusBadge("Hadir")],
         ["05 Okt 2026", "Evaluasi Program", "DPC", statusBadge("Hadir")],
         ["28 Sep 2026", "Konsolidasi Pengurus", "DPC", statusBadge("Terlambat")]
@@ -679,23 +679,23 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     if (action === "go-qr") { goToPage("qr-saya"); return; }
     if (action === "go-riwayat") { goToPage("riwayat"); return; }
     if (action === "go-rapor") { goToPage("rapor-saya"); return; }
-    if (action === "new-unit") { toast("Form unit baru siap ditambahkan pada integrasi berikutnya."); return; }
-    if (action === "new-meeting") { toast("Mode demo: alur formulir rapat ditampilkan sebagai simulasi."); return; }
-    if (action === "meeting-detail") { toast("Detail agenda demo dibuka. Tidak ada data produksi yang diakses."); return; }
+    if (action === "new-unit") { toast("Penambahan unit belum tersedia dari halaman ini."); return; }
+    if (action === "new-meeting") { toast("Pembuatan rapat belum tersedia dari halaman ini."); return; }
+    if (action === "meeting-detail") { toast("Detail agenda belum tersedia di halaman ini."); return; }
     if (action === "detail-struktur") { toast("Detail unit organisasi demo."); return; }
-    if (action === "new-admin") { toast("Mode demo: pembuatan akun administratif tidak mengubah akun sungguhan."); return; }
-    if (action === "admin-detail") { toast("Pengelolaan akun hanya simulasi UI."); return; }
-    if (action === "save-settings") { toast("Preferensi demo ditampilkan; tidak ada konfigurasi server yang diubah.", "success"); return; }
+    if (action === "new-admin") { toast("Pembuatan akun administratif belum tersedia dari halaman ini."); return; }
+    if (action === "admin-detail") { toast("Pengelolaan akun belum tersedia dari halaman ini."); return; }
+    if (action === "save-settings") { toast("Perubahan preferensi belum dapat disimpan ke server.", "success"); return; }
     if (action === "scan-member") {
       const field = document.getElementById("scanMemberId");
-      if (!field || !field.value.trim()) { toast("Masukkan ID anggota demo terlebih dahulu.", "error"); return; }
-      toast("Identitas demo ditemukan. Check-in tidak dikirim ke backend.", "success");
+      if (!field || !field.value.trim()) { toast("Masukkan ID anggota terlebih dahulu.", "error"); return; }
+      toast("Pemeriksaan dilakukan pada data yang tersedia di halaman ini. Kehadiran belum tercatat ke server.", "success");
       return;
     }
     if (action === "send-invitation") {
       const file = document.getElementById("invitationPdf");
-      if (!file || !file.files || !file.files.length) { toast("Pilih berkas PDF sebelum menjalankan simulasi.", "error"); return; }
-      toast("Simulasi selesai: 31 penerima demo. Tidak ada WhatsApp terkirim.", "success");
+      if (!file || !file.files || !file.files.length) { toast("Pilih dokumen PDF terlebih dahulu.", "error"); return; }
+      toast("Dokumen dipilih. Pengiriman WhatsApp belum tersedia dari halaman ini.", "success");
       return;
     }
     if (action === "toggle-attendance") {
@@ -703,14 +703,14 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
       if (!Number.isInteger(index) || !demoAttendance[index]) return;
       demoAttendance[index][3] = demoAttendance[index][3] === "Hadir" ? "Belum Absen" : "Hadir";
       goToPage("absensi");
-      toast("Status demo diperbarui untuk sesi ini.", "success");
+      toast("Status diperbarui pada tampilan ini; perubahan belum tersimpan ke server.", "success");
       return;
     }
     if (action === "export-attendance" || action === "export-report") {
       const csv = "Nama;Unit;Jabatan;Status\r\n" + demoAttendance.map(function (row) { return row.map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(";"); }).join("\r\n");
       const url = URL.createObjectURL(new Blob(["\uFEFF", csv], { type: "text/csv;charset=utf-8;" }));
-      const a = document.createElement("a"); a.href = url; a.download = "redhub-laporan-demo.csv"; document.body.append(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-      toast("File CSV demo disiapkan.", "success");
+      const a = document.createElement("a"); a.href = url; a.download = "redhub-laporan.csv"; document.body.append(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      toast("File CSV berhasil dibuat dari data yang tersedia di halaman ini.", "success");
       return;
     }
     if (action === "print-report") { window.print(); return; }
