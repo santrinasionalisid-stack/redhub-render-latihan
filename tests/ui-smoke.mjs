@@ -91,6 +91,21 @@ try {
     }
   });
 
+  await check("Pengurus hero displays REDHUB logo on desktop and mobile", async () => {
+    for (const width of [390, 1440]) {
+      const { context, page, pageErrors } = await freshPage({ width, height: 900 });
+      try {
+        await signIn(page, "pengurus@redhub.demo");
+        const logo = page.locator(".member-welcome .stage-core-logo");
+        await logo.waitFor({ state: "visible" });
+        assert(await logo.evaluate(el => el.complete && el.naturalWidth > 0), "Hero logo image must load");
+        const bounds = await logo.boundingBox();
+        assert(bounds && bounds.width >= 40 && bounds.height >= 40, "Hero logo must be large enough to see");
+        assert.deepEqual(pageErrors, [], "Browser JavaScript errors detected");
+      } finally { await context.close(); }
+    }
+  });
+
   await check("Mobile navigation opens and closes when tapping outside", async () => {
     const { context, page, pageErrors } = await freshPage({ width: 390, height: 844 });
     try {
