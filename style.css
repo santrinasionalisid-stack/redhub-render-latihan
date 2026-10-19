@@ -1966,3 +1966,31 @@ input::placeholder, textarea::placeholder {
   .member-welcome .stage-core-logo { width: 46px; height: 46px; object-fit: contain; }
   .member-welcome .stage-index { display: none; }
 }
+
+/* V16.5 — shared mobile-first treatment across role workspaces and login. */
+.member-id-layout { grid-template-columns: minmax(0, 1fr); max-width: 680px; margin-inline: auto; gap: 14px; }
+.member-id-card { width: 100%; }
+.member-id-layout > .analytics-card { width: 100%; }
+@media (max-width: 600px) {
+  .workspace { width: 100%; min-width: 0; padding-inline: 14px; }
+  .login-form-side { min-width: 0; padding-inline: 20px; }
+  .login-form-wrap { width: 100%; max-width: 430px; }
+  .generated-page, .generated-panel, .panel, .analytics-card, .generated-content-grid { min-width: 0; max-width: 100%; }
+  .generated-stats, .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .generated-stats .stat-card, .stats .stat-card { min-width: 0; overflow-wrap: anywhere; }
+  .generated-table-wrap, .table-wrap { width: 100%; max-width: 100%; overflow-x: auto; }
+  .panel-actions button, .member-quick-actions button { min-height: 44px; }
+  .member-id-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .member-id-card { padding: 18px 16px; }
+  .member-id-brand { gap: 8px; flex-wrap: wrap; }
+  .member-id-brand small { font-size: 10px; }
+  .member-id-profile { gap: 12px; margin: 18px 0; min-width: 0; }
+  .member-id-profile > div:last-child { min-width: 0; overflow-wrap: anywhere; }
+  .member-id-profile h2 { font-size: 17px; }
+  .member-id-profile p { font-size: 12px; }
+  .member-id-card .demo-qr { width: 160px; height: 160px; max-width: 100%; }
+  .member-id-code { font-size: 12px; }
+  .member-id-card > .demo-note { font-size: 11px; }
+  .member-id-layout > .analytics-card { padding: 18px 16px; }
+  .member-id-layout .step-list li { font-size: 12px; align-items: flex-start; }
+}

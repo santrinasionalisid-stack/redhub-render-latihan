@@ -156,6 +156,35 @@ try {
       } finally { await context.close(); }
     }
   });
+  await check("V16.5 role pages and QR Saya follow mobile-first layout", async () => {
+    for (const width of [320, 390, 430]) {
+      for (const account of ["superadmin@redhub.demo", "admin@redhub.demo", "pengurus@redhub.demo"]) {
+        const { context, page, pageErrors } = await freshPage({ width, height: 844 });
+        try {
+          const loginWidth = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+          assert(loginWidth <= 1, "Login page overflows mobile viewport");
+          await signIn(page, account);
+          const routes = await page.locator(".sidebar .nav-item").evaluateAll(links => links.map(a => a.dataset.page));
+          for (const route of routes) {
+            await page.locator(`.sidebar .nav-item[data-page="${route}"]`).evaluate(el => el.click());
+            const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+            assert(overflow <= 1, `Mobile horizontal overflow: ${account} / ${route} / ${width}px`);
+            if (account.startsWith("pengurus") && route === "qr-saya") {
+              const positions = await page.evaluate(() => {
+                const identity = document.querySelector(".member-id-card")?.getBoundingClientRect();
+                const instructions = document.querySelector(".member-id-layout > .analytics-card")?.getBoundingClientRect();
+                return {identity: identity && {left:identity.left,right:identity.right,bottom:identity.bottom}, instructions:instructions && {left:instructions.left,top:instructions.top}};
+              });
+              assert(positions.identity && positions.instructions, "QR identity and instructions must exist");
+              assert(positions.instructions.top >= positions.identity.bottom, "Check-in instructions must be below identity card");
+              assert(Math.abs(positions.instructions.left - positions.identity.left) <= 2, "QR cards must align vertically");
+            }
+          }
+          assert.deepEqual(pageErrors, [], `Unexpected JavaScript errors for ${account} on ${width}px`);
+        } finally { await context.close(); }
+      }
+    }
+  });
 } finally {
   await browser.close();
 }
