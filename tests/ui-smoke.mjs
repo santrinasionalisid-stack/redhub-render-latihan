@@ -275,6 +275,33 @@ try {
       assert.deepEqual(pageErrors, [], "No JS exceptions");
     } finally { await context.close(); }
   });
+  await check("V16.9 compact drawer and Pengurus identity card", async () => {
+    for (const width of [320, 390, 430]) {
+      const { context, page, pageErrors } = await freshPage({ width, height: 844 });
+      try {
+        await signIn(page, "pengurus@redhub.demo");
+        await page.locator('.sidebar .nav-item[data-page="profil"]').evaluate(el => el.click());
+        const profile = page.locator(".profile-detail-grid");
+        assert(await profile.locator(".profile-identity").isVisible(), "Mobile identity heading must be visible");
+        const geometry = await profile.evaluate(el => {
+          const header = el.querySelector(".profile-identity").getBoundingClientRect();
+          const rows = [...el.querySelectorAll(":scope > div:not(.profile-identity):not(.profile-detail-avatar)")].map(x => x.getBoundingClientRect());
+          return { header, rows: rows.map(r => ({top:r.top,bottom:r.bottom,width:r.width})), width:el.getBoundingClientRect().width };
+        });
+        assert(geometry.rows[0].top >= geometry.header.bottom - 1, "Profile detail rows must be below identity header");
+        assert(geometry.rows.every((r,i) => i===0 || r.top >= geometry.rows[i-1].bottom - 1), "Profile rows must stack vertically");
+        await page.locator(".mobile-nav-toggle").click();
+        await page.waitForTimeout(350);
+        const drawer = await page.locator(".sidebar").boundingBox();
+        assert(drawer && drawer.x >= -1 && drawer.width <= 236, "Mobile drawer must be compact and visible");
+        assert(drawer.width <= width - 80, "Mobile drawer must leave space outside for dismissal");
+        assert(await page.locator(".sidebar .mobile-logout").isVisible(), "Logout must remain visible");
+        await page.mouse.click(width - 16, 180);
+        assert.equal(await page.locator("body").evaluate(el => el.classList.contains("mobile-nav-open")), false, "Tap outside must close drawer");
+        assert.deepEqual(pageErrors, [], "No JavaScript errors");
+      } finally { await context.close(); }
+    }
+  });
 } finally {
   await browser.close();
 }
