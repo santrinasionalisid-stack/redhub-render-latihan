@@ -10,6 +10,7 @@ on:
       - feat/v16-5-unified-mobile-qr
       - fix/v16-6-premium-mobile-login
       - fix/v16-7-clean-mobile-login
+      - fix/v16-8-mobile-polish
   workflow_dispatch:
     inputs:
       base_url:

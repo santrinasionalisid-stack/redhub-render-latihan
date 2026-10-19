@@ -481,7 +481,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     }
     if (route === "laporan" || route === "rapor-saya") {
       const personal = role === "pengurus";
-      return '<div class="stats generated-stats">' + metricCard(personal ? "KEHADIRAN PRIBADI" : "TINGKAT KEHADIRAN", personal ? "92%" : "67,2%", personal ? "11 dari 12 agenda" : "86 dari 128 anggota", "stat-present") + metricCard(personal ? "HADIR" : "TOTAL ANGGOTA", personal ? "11" : "128", personal ? "Dalam periode aktif" : "Seluruh unit demo", "") + metricCard(personal ? "IZIN" : "BELUM ABSEN", personal ? "1" : "42", personal ? "Tercatat pada agenda" : "Perlu ditindaklanjuti", "stat-absent") + '</div>' + panel(personal ? "Rapor kehadiran saya" : "Ringkasan laporan", "Ringkasan kehadiran untuk periode yang dipilih.", '<div class="report-bars"><div><span>September</span><i style="--bar:82%"></i><b>82%</b></div><div><span>Oktober</span><i style="--bar:92%"></i><b>92%</b></div><div><span>November</span><i style="--bar:76%"></i><b>76%</b></div></div><p class="demo-note">Grafik contoh untuk pratinjau UI, bukan tren historis produksi.</p>', button("Ekspor CSV", "export-report", true) + button("Cetak Laporan", "print-report", false));
+      return '<div class="stats generated-stats">' + metricCard(personal ? "KEHADIRAN PRIBADI" : "TINGKAT KEHADIRAN", personal ? "92%" : "67,2%", personal ? "11 dari 12 agenda" : "86 dari 128 anggota", "stat-present") + metricCard(personal ? "HADIR" : "TOTAL ANGGOTA", personal ? "11" : "128", personal ? "Dalam periode aktif" : "Seluruh unit demo", "") + metricCard(personal ? "IZIN" : "BELUM ABSEN", personal ? "1" : "42", personal ? "Tercatat pada agenda" : "Perlu ditindaklanjuti", "stat-absent") + '</div>' + panel(personal ? "Rapor kehadiran saya" : "Ringkasan laporan", "Ringkasan kehadiran untuk periode yang dipilih.", '<div class="report-bars"><div><span>September</span><i style="--bar:82%"></i><b>82%</b></div><div><span>Oktober</span><i style="--bar:92%"></i><b>92%</b></div><div><span>November</span><i style="--bar:76%"></i><b>76%</b></div></div><p class="demo-note">Grafik contoh untuk pratinjau UI, bukan tren historis produksi.</p>', button("Ekspor CSV", "export-report", true).replace("data-action=", "data-mobile-personal-report-action data-action=") + button("Cetak Laporan", "print-report", false).replace("data-action=", "data-mobile-personal-report-action data-action="));
     }
     if (route === "admins") {
       return panel("Akun administratif", "Hanya Super Admin yang melihat halaman ini pada prototype.", table(["Nama", "Peran", "Status", "Aktivitas Terakhir", "Aksi"], [
@@ -518,7 +518,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     return "";
   }
   function memberDashboard() {
-    return '<section class="brand-stage member-welcome"><div class="brand-stage-copy"><div class="brand-stage-overline"><span class="brand-stage-pulse"></span> MEMBER WORKSPACE <span class="brand-stage-divider">/</span> PORTAL PENGURUS</div><h2>Selamat datang,<br><span>Andi Pratama.</span></h2><p>Pantau agenda, identitas digital, dan rekam kehadiran Anda dari satu tempat.</p><div class="brand-stage-tags"><span>01 <b>AGENDA</b></span><span>02 <b>QR SAYA</b></span><span>03 <b>RAPOR</b></span></div></div><div class="brand-stage-art"><div class="stage-core"><img class="stage-core-logo" src="Gemini_Generated_Image_7zhe497zhe497zhe-removebg-preview.png" alt="Logo REDHUB" width="88" height="88"></div><span class="stage-index">MEMBER—01</span></div></section><div class="stats generated-stats">' + metricCard("AGENDA MENDATANG", "02", "Rapat yang mengundang Anda", "") + metricCard("TINGKAT KEHADIRAN", "92%", "11 dari 12 agenda", "stat-present") + metricCard("STATUS PENGURUS", "Aktif", "DPC Jember · Sekretaris", "") + metricCard("PERIODE", "2025–30", "Masa jabatan aktif", "") + '</div>' + panel("Agenda terdekat", "Pastikan Anda mengetahui jadwal rapat berikutnya.", table(["Agenda", "Jadwal", "Status", "Aksi"], demoMeetings.slice(0, 2).map(function (m) { return [escapeHtml(m.title), escapeHtml(m.date), statusBadge(m.status), '<button class="button-small button-edit" data-action="meeting-detail">Lihat detail</button>']; })), '<div class="member-quick-actions"><button class="button-secondary" data-action="go-qr">▦ Buka QR Saya</button><button class="button-secondary" data-action="go-riwayat">Riwayat Kehadiran</button><button class="button-primary" data-action="go-rapor">Lihat Rapor Saya</button></div>');
+    return '<section class="brand-stage member-welcome"><div class="brand-stage-copy"><div class="brand-stage-overline"><span class="brand-stage-pulse"></span> MEMBER WORKSPACE <span class="brand-stage-divider">/</span> PORTAL PENGURUS</div><h2>Selamat datang,<br><span>Andi Pratama.</span></h2><p>Pantau agenda, identitas digital, dan rekam kehadiran Anda dari satu tempat.</p><div class="brand-stage-tags"><span>01 <b>AGENDA</b></span><span>02 <b>QR SAYA</b></span><span>03 <b>RAPOR</b></span></div></div><div class="brand-stage-art"><div class="stage-core"><img class="stage-core-logo" src="Gemini_Generated_Image_7zhe497zhe497zhe-removebg-preview.png" alt="Logo REDHUB" width="88" height="88"></div><span class="stage-index">MEMBER—01</span></div></section><div class="stats generated-stats">' + metricCard("AGENDA MENDATANG", "02", "Rapat yang mengundang Anda", "") + metricCard("TINGKAT KEHADIRAN", "92%", "11 dari 12 agenda", "stat-present") + metricCard("STATUS PENGURUS", "Aktif", "DPC Jember · Sekretaris", "") + metricCard("PERIODE", "2025–2030", "Masa jabatan aktif", "") + '</div>' + panel("Agenda terdekat", "Pastikan Anda mengetahui jadwal rapat berikutnya.", table(["Agenda", "Jadwal", "Status", "Aksi"], demoMeetings.slice(0, 2).map(function (m) { return [escapeHtml(m.title), escapeHtml(m.date), statusBadge(m.status), '<button class="button-small button-edit" data-action="meeting-detail">Lihat detail</button>']; })), '<div class="member-quick-actions"><button class="button-primary" data-action="go-qr">▦ Buka QR Saya</button><button class="button-secondary" data-action="go-riwayat">Riwayat Kehadiran</button><button class="button-secondary" data-action="go-rapor">Lihat Rapor Saya</button></div>');
   }
   let currentRole = null;
   let currentPage = "dashboard";
@@ -544,6 +544,15 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     navList.innerHTML = navByRole[currentRole].map(function (item) {
       return '<a class="nav-item" href="#" data-page="' + item[0] + '">' + svgIcon(item[2]) + '<span>' + item[1] + '</span></a>';
     }).join("");
+    let mobileLogout = sidebar.querySelector(".mobile-logout");
+    if (!mobileLogout) {
+      mobileLogout = document.createElement("button");
+      mobileLogout.type = "button";
+      mobileLogout.className = "mobile-logout";
+      mobileLogout.dataset.action = "logout-confirm";
+      mobileLogout.textContent = "Keluar dari Akun";
+      sidebar.appendChild(mobileLogout);
+    }
     const bottom = document.querySelector(".sidebar-bottom");
     if (bottom) {
       const card = bottom.querySelector(".workspace-card");
@@ -558,7 +567,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
   function updateProfile() {
     const profile = document.querySelector(".profile");
     if (!profile) return;
-    profile.innerHTML = '<div class="avatar">' + (currentRole === "super_admin" ? "S" : currentRole === "admin" ? "A" : "P") + '</div><div class="profile-copy"><strong>' + roleLabels[currentRole] + '</strong><small>' + (currentRole === "pengurus" ? "Andi Pratama" : "Akses organisasi") + '</small></div><button type="button" class="profile-logout" data-action="logout" aria-label="Keluar dari akun">↪</button>';
+    profile.innerHTML = '<div class="avatar">' + (currentRole === "super_admin" ? "S" : currentRole === "admin" ? "A" : "P") + '</div><div class="profile-copy"><strong>' + roleLabels[currentRole] + '</strong><small>' + (currentRole === "pengurus" ? "Andi Pratama" : "Akses organisasi") + '</small></div><button type="button" class="profile-logout" data-action="logout-confirm" aria-label="Keluar dari akun">↪</button>';
   }
   function setHeader(route) {
     const meta = pageMeta[route] || pageMeta.dashboard;
@@ -605,11 +614,12 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
       else link.removeAttribute("aria-current");
     });
     setHeader(route);
-    if (window.matchMedia("(max-width: 900px)").matches) body.classList.remove("mobile-nav-open");
+    if (window.matchMedia("(max-width: 900px)").matches) { body.classList.remove("mobile-nav-open"); sidebar.style.removeProperty("transform"); }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
   function login(role) {
     currentRole = role;
+    body.dataset.role = role;
     try { localStorage.setItem(ROLE_KEY, role); } catch (error) {}
     body.classList.remove("auth-required");
     loginScreen.hidden = true;
@@ -618,8 +628,18 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     // Opening the workspace already confirms successful demo sign-in;
     // avoid a redundant toast covering mobile dashboard content.
   }
+  const logoutDialog = document.createElement("div");
+  logoutDialog.className = "logout-dialog-layer";
+  logoutDialog.hidden = true;
+  logoutDialog.innerHTML = '<div class="logout-dialog" role="dialog" aria-modal="true" aria-labelledby="logoutTitle" aria-describedby="logoutDescription"><div class="logout-dialog-icon" aria-hidden="true">↪</div><h2 id="logoutTitle">Keluar dari REDHUB?</h2><p id="logoutDescription">Anda perlu masuk kembali untuk mengakses ruang kerja organisasi.</p><div class="logout-dialog-actions"><button type="button" class="button-secondary" data-action="logout-cancel">Batal</button><button type="button" class="button-primary" data-action="logout-accept">Ya, Keluar</button></div></div>';
+  document.body.appendChild(logoutDialog);
+  function openLogoutConfirm() { logoutDialog.hidden = false; logoutDialog.querySelector('[data-action="logout-cancel"]').focus(); }
+  function closeLogoutConfirm() { logoutDialog.hidden = true; }
+  logoutDialog.addEventListener("click", function (event) { if (event.target === logoutDialog) closeLogoutConfirm(); });
+  document.addEventListener("keydown", function (event) { if (event.key === "Escape" && !logoutDialog.hidden) closeLogoutConfirm(); });
   function logout() {
     currentRole = null;
+    delete body.dataset.role;
     try { localStorage.removeItem(ROLE_KEY); } catch (error) {}
     showLogin();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -648,7 +668,9 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     const actionEl = event.target.closest("[data-action]");
     if (!actionEl) return;
     const action = actionEl.dataset.action;
-    if (action === "logout") { logout(); return; }
+    if (action === "logout-confirm") { openLogoutConfirm(); return; }
+    if (action === "logout-cancel") { closeLogoutConfirm(); return; }
+    if (action === "logout-accept") { closeLogoutConfirm(); logout(); return; }
     if (action === "toggle-password") {
       const input = document.getElementById("loginPassword");
       if (input) { const visible = input.type === "password"; input.type = visible ? "text" : "password"; actionEl.setAttribute("aria-pressed", String(visible)); actionEl.setAttribute("aria-label", visible ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"); actionEl.classList.toggle("is-visible", visible); }
@@ -717,6 +739,8 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
   topbar.insertBefore(mobileToggle, topbar.firstChild);
   mobileToggle.addEventListener("click", function () {
     const opened = body.classList.toggle("mobile-nav-open");
+    if (opened) sidebar.style.setProperty("transform", "translateX(0)", "important");
+    else sidebar.style.removeProperty("transform");
     mobileToggle.setAttribute("aria-expanded", String(opened));
     mobileToggle.setAttribute("aria-label", opened ? "Tutup navigasi" : "Buka navigasi");
   });
@@ -724,6 +748,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     if (!body.classList.contains("mobile-nav-open")) return;
     if (event.target.closest(".sidebar") || event.target.closest(".mobile-nav-toggle")) return;
     body.classList.remove("mobile-nav-open");
+    sidebar.style.removeProperty("transform");
     mobileToggle.setAttribute("aria-expanded", "false");
     mobileToggle.setAttribute("aria-label", "Buka navigasi");
   });
