@@ -38,6 +38,15 @@ async function captureRole(role, viewport, suffix) {
       window.scrollTo(0, 0);
     });
     await page.waitForFunction(() => window.scrollY === 0);
+    const geometry = await page.evaluate(() => {
+      const rect = selector => {
+        const element = document.querySelector(selector);
+        const box = element?.getBoundingClientRect();
+        return box ? { top: Math.round(box.top), height: Math.round(box.height) } : null;
+      };
+      return { scrollY: window.scrollY, workspace: rect(".workspace"), topbar: rect(".topbar"), login: rect(".login-screen") };
+    });
+    console.log("VISUAL_GEOMETRY", role.name, suffix, JSON.stringify(geometry));
     await page.screenshot({
       path: `${outputDir}/dashboard-${role.name}-${suffix}.png`,
       fullPage: true,
