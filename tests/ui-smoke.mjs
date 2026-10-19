@@ -126,6 +126,21 @@ try {
       await context.close();
     }
   });
+  await check("Mobile viewport stays contained at 320, 375, 390 and 430px", async () => {
+    for (const width of [320, 375, 390, 430]) {
+      const { context, page, pageErrors } = await freshPage({ width, height: 844 });
+      try {
+        await signIn(page, "admin@redhub.demo");
+        const metrics = await page.evaluate(() => ({
+          viewport: document.documentElement.clientWidth,
+          pageWidth: document.documentElement.scrollWidth,
+          inputs: [...document.querySelectorAll("input, select, textarea")].filter(el => el.getClientRects().length).map(el => parseFloat(getComputedStyle(el).fontSize)),
+        }));
+        assert(metrics.pageWidth <= metrics.viewport + 1, `Horizontal overflow at ${width}px: ${JSON.stringify(metrics)}`);
+        assert.deepEqual(pageErrors, [], `Browser errors at ${width}px`);
+      } finally { await context.close(); }
+    }
+  });
 } finally {
   await browser.close();
 }
