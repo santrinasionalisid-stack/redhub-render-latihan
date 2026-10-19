@@ -2131,3 +2131,43 @@ input::placeholder, textarea::placeholder {
 @media (max-width: 900px) {
   body.mobile-nav-open .sidebar { transform: translateX(0) !important; }
 }
+
+/* V16.9 — compact mobile navigation and deliberate Pengurus identity presentation. */
+.profile-identity { display: none; }
+@media (max-width: 900px) {
+  .sidebar { width: min(236px, calc(100vw - 88px)); }
+  .sidebar .nav-item { gap: 9px; padding-inline: 11px; }
+  .sidebar .mobile-logout { left: 14px; right: 14px; width: calc(100% - 28px); }
+  .profile-detail-grid {
+    display: grid; grid-template-columns: minmax(0, 1fr);
+    gap: 0; padding: 0 18px 8px;
+  }
+  .profile-detail-grid > .profile-identity {
+    display: flex; align-items: center; gap: 15px;
+    padding: 18px 0; border-bottom: 1px solid var(--border);
+  }
+  .profile-detail-grid > .profile-detail-avatar { display: none; }
+  .profile-detail-grid .profile-identity .profile-detail-avatar {
+    display: grid; flex: 0 0 62px; width: 62px; height: 62px; margin: 0;
+    border-radius: 17px;
+  }
+  .profile-identity-copy { min-width: 0; }
+  .profile-identity-copy h3 { margin: 5px 0 2px; font-size: 18px; line-height: 1.35; }
+  .profile-identity-copy .subtitle { margin: 0; font-size: 12px; }
+  .profile-detail-grid > div:not(.profile-identity):not(.profile-detail-avatar) {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center; gap: 5px 12px; min-height: 65px;
+    padding: 13px 0; border-bottom: 1px solid var(--border);
+  }
+  .profile-detail-grid > div:not(.profile-identity):not(.profile-detail-avatar) > .stat-label {
+    grid-column: 1 / -1; font-size: 10px;
+  }
+  .profile-detail-grid > div:not(.profile-identity):not(.profile-detail-avatar) > h3,
+  .profile-detail-grid > div:not(.profile-identity):not(.profile-detail-avatar) > strong {
+    grid-column: 1 / -1; font-size: 14px; line-height: 1.5; font-weight: 600;
+  }
+  .profile-detail-grid > .profile-detail-name > .subtitle {
+    grid-column: 1 / -1; margin: 0; font-size: 11px;
+  }
+  .profile-detail-grid > div:last-child { border-bottom: none !important; }
+}
