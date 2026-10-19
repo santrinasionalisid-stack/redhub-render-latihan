@@ -29,9 +29,15 @@ async function captureRole(role, viewport, suffix) {
     await page.locator("#loginPassword").fill("Demo123!");
     await page.locator("#demoLoginForm button[type=submit]").click();
     await page.locator(".nav-item").first().waitFor({ state: "visible", timeout: 10000 });
-    await page.waitForLoadState("domcontentloaded").catch(() => {});
-    // Keep transient success toasts out of baseline dashboard screenshots.
-    await page.locator(".demo-toast.is-visible").waitFor({ state: "hidden", timeout: 6000 }).catch(() => {});
+    // Capture only after the logged-in workspace and scroll position are stable.
+    await page.locator(".login-screen").waitFor({ state: "hidden", timeout: 10000 });
+    await page.locator(".nav-item.active").first().waitFor({ state: "visible", timeout: 10000 });
+    await page.locator(".demo-toast.is-visible").waitFor({ state: "hidden", timeout: 7000 });
+    await page.evaluate(() => {
+      document.documentElement.style.scrollBehavior = "auto";
+      window.scrollTo(0, 0);
+    });
+    await page.waitForFunction(() => window.scrollY === 0);
     await page.screenshot({
       path: `${outputDir}/dashboard-${role.name}-${suffix}.png`,
       fullPage: true,
