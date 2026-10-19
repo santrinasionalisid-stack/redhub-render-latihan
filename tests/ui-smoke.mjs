@@ -262,14 +262,14 @@ try {
         const s=sidebar.getBoundingClientRect(), b=button.getBoundingClientRect();
         return {isOpen:document.body.classList.contains("mobile-nav-open"),match:sidebar.matches("body.mobile-nav-open .sidebar"),transform:getComputedStyle(sidebar).transform,inline:sidebar.getAttribute("style"),sidebar:{x:s.x,y:s.y,width:s.width,height:s.height},button:{x:b.x,y:b.y,width:b.width,height:b.height}, viewport:{w:innerWidth,h:innerHeight}};
       })));
-      await drawerLogout.click();
+      { const rect = await drawerLogout.boundingBox(); assert(rect && rect.x >= 0 && rect.y >= 0 && rect.y + rect.height <= 844, "Logout must fit inside viewport"); await page.mouse.click(rect.x + rect.width / 2, rect.y + rect.height / 2); }
       const confirm = page.locator(".logout-dialog-layer");
       assert(await confirm.isVisible(), "Logout confirmation must open");
       await page.locator('[data-action="logout-cancel"]').click();
       assert.equal(await confirm.isVisible(), false, "Cancellation must close confirmation");
       assert.equal(await page.locator(".login-screen").isVisible(), false, "Cancel must preserve login session");
       if (!await drawerLogout.evaluate(el => el.getBoundingClientRect().left >= 0)) await menuToggle.click();
-      await drawerLogout.click();
+      { const rect = await drawerLogout.boundingBox(); assert(rect && rect.x >= 0 && rect.y >= 0 && rect.y + rect.height <= 844, "Logout must fit inside viewport"); await page.mouse.click(rect.x + rect.width / 2, rect.y + rect.height / 2); }
       await page.locator('[data-action="logout-accept"]').click();
       assert(await page.locator(".login-screen").isVisible(), "Confirmed logout must open login");
       assert.deepEqual(pageErrors, [], "No JS exceptions");
