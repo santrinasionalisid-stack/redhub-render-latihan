@@ -302,6 +302,24 @@ try {
       } finally { await context.close(); }
     }
   });
+  await check("V16.10 release copy across login and permitted role pages", async () => {
+    const disallowed = /\\b(?:mode latihan|data demo|simulasi|prototype|pratinjau ui|organisasi demo|mode demo)\\b/i;
+    for (const account of ["superadmin@redhub.demo", "admin@redhub.demo", "pengurus@redhub.demo"]) {
+      const { context, page, pageErrors } = await freshPage({ width: 390, height: 844 });
+      try {
+        const loginText = await page.locator("#loginScreen").innerText();
+        assert(!disallowed.test(loginText), "Login copy must be release-ready");
+        await signIn(page, account);
+        const routes = await page.locator(".sidebar .nav-item").evaluateAll(items => items.map(el => el.dataset.page));
+        for (const route of routes) {
+          await page.locator(`.sidebar .nav-item[data-page="${route}"]`).evaluate(el => el.click());
+          const visibleText = await page.locator(".workspace").innerText();
+          assert(!disallowed.test(visibleText), `Release copy not complete: ${account}/${route}`);
+        }
+        assert.deepEqual(pageErrors, []);
+      } finally { await context.close(); }
+    }
+  });
 } finally {
   await browser.close();
 }
