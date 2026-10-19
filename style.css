@@ -1945,3 +1945,24 @@ input::placeholder, textarea::placeholder {
   /* iOS Safari does not focus-zoom form fields at 16px or larger. */
   input, select, textarea { font-size: 16px; }
 }
+
+/* V16.4 — Pengurus hero keeps the REDHUB identity on mobile. */
+@media (max-width: 600px) {
+  .member-welcome { position: relative; }
+  .member-welcome .brand-stage-copy { padding-right: 20px; }
+  .member-welcome .brand-stage-art {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 0;
+    padding: 0 20px 20px;
+  }
+  .member-welcome .stage-core {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+  }
+  .member-welcome .stage-core-logo { width: 46px; height: 46px; object-fit: contain; }
+  .member-welcome .stage-index { display: none; }
+}
