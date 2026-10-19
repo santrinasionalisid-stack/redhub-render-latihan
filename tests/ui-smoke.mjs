@@ -254,12 +254,13 @@ try {
       assert.equal(await page.locator(".profile-logout").isVisible(), false, "Header logout must be hidden on mobile");
       const menuToggle = page.locator(".mobile-nav-toggle");
       await menuToggle.click();
+      await page.waitForTimeout(400);
       const drawerLogout = page.locator(".sidebar .mobile-logout");
       assert(await drawerLogout.isVisible(), "Drawer logout must be visible");
       console.log("LOGOUT_GEOMETRY", JSON.stringify(await page.evaluate(() => {
         const sidebar=document.querySelector(".sidebar"), button=document.querySelector(".mobile-logout");
         const s=sidebar.getBoundingClientRect(), b=button.getBoundingClientRect();
-        return {isOpen:document.body.classList.contains("mobile-nav-open"),match:sidebar.matches("body.mobile-nav-open .sidebar"),transform:getComputedStyle(sidebar).transform,sidebar:{x:s.x,y:s.y,width:s.width,height:s.height},button:{x:b.x,y:b.y,width:b.width,height:b.height}, viewport:{w:innerWidth,h:innerHeight}};
+        return {isOpen:document.body.classList.contains("mobile-nav-open"),match:sidebar.matches("body.mobile-nav-open .sidebar"),transform:getComputedStyle(sidebar).transform,inline:sidebar.getAttribute("style"),sidebar:{x:s.x,y:s.y,width:s.width,height:s.height},button:{x:b.x,y:b.y,width:b.width,height:b.height}, viewport:{w:innerWidth,h:innerHeight}};
       })));
       await drawerLogout.click();
       const confirm = page.locator(".logout-dialog-layer");
