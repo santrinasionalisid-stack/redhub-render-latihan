@@ -185,6 +185,24 @@ try {
       }
     }
   });
+  await check("V16.6 branded login mobile layout", async () => {
+    for (const width of [320, 390, 430, 768]) {
+      const { context, page, pageErrors } = await freshPage({ width, height: 844 });
+      try {
+        const result = await page.evaluate(() => {
+          const brand = document.querySelector(".login-brand");
+          const form = document.querySelector(".login-form-side");
+          const image = document.querySelector(".login-logo img");
+          const b = brand.getBoundingClientRect(), f = form.getBoundingClientRect();
+          return {brandVisible: getComputedStyle(brand).display !== "none", bBottom:b.bottom, fTop:f.top, formWithin:f.right <= innerWidth + 1, pageWidth:document.documentElement.scrollWidth, viewport:document.documentElement.clientWidth, logoLoaded:image.complete && image.naturalWidth>0};
+        });
+        assert(result.brandVisible && result.logoLoaded, `Missing brand or logo at ${width}px`);
+        assert(result.fTop >= result.bBottom - 1, `Brand and form must stack at ${width}px`);
+        assert(result.formWithin && result.pageWidth <= result.viewport + 1, `Mobile login overflow at ${width}px`);
+        assert.deepEqual(pageErrors, []);
+      } finally { await context.close(); }
+    }
+  });
 } finally {
   await browser.close();
 }
