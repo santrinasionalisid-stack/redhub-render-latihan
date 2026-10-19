@@ -259,7 +259,7 @@ try {
       console.log("LOGOUT_GEOMETRY", JSON.stringify(await page.evaluate(() => {
         const sidebar=document.querySelector(".sidebar"), button=document.querySelector(".mobile-logout");
         const s=sidebar.getBoundingClientRect(), b=button.getBoundingClientRect();
-        return {isOpen:document.body.classList.contains("mobile-nav-open"),sidebar:{x:s.x,y:s.y,width:s.width,height:s.height},button:{x:b.x,y:b.y,width:b.width,height:b.height}, viewport:{w:innerWidth,h:innerHeight}};
+        return {isOpen:document.body.classList.contains("mobile-nav-open"),match:sidebar.matches("body.mobile-nav-open .sidebar"),transform:getComputedStyle(sidebar).transform,sidebar:{x:s.x,y:s.y,width:s.width,height:s.height},button:{x:b.x,y:b.y,width:b.width,height:b.height}, viewport:{w:innerWidth,h:innerHeight}};
       })));
       await drawerLogout.click();
       const confirm = page.locator(".logout-dialog-layer");
