@@ -233,6 +233,41 @@ try {
       } finally { await context.close(); }
     }
   });
+  await check("V16.8 mobile Pengurus hero, CTAs, report, profile and safe logout", async () => {
+    const { context, page, pageErrors } = await freshPage({ width: 390, height: 844 });
+    try {
+      const logo = page.locator(".login-brand .login-logo img");
+      assert(await logo.evaluate(el => el.complete && el.naturalWidth > 0), "Login bull logo must load");
+      const logoStyle = await logo.evaluate(el => getComputedStyle(el).borderRadius);
+      assert.equal(logoStyle, "50%", "Mobile login emblem must be circular");
+      await signIn(page, "pengurus@redhub.demo");
+      assert(await page.locator(".member-welcome .stage-core-logo").isVisible(), "Pengurus hero logo must be visible");
+      assert(await page.getByText("2025–2030", { exact: true }).count() > 0, "Period should show full year");
+      assert.equal(await page.locator(".member-quick-actions [data-action='go-qr']").evaluate(el => el.classList.contains("button-primary")), true);
+      assert.equal(await page.locator(".footer-promo").isVisible(), false);
+      await page.locator('.sidebar .nav-item[data-page="rapor-saya"]').evaluate(el => el.click());
+      assert.equal(await page.locator("[data-mobile-personal-report-action]").count(), 2, "Export and print actions must exist for desktop");
+      assert.equal(await page.locator("[data-mobile-personal-report-action]").first().isVisible(), false, "Export and print hidden on mobile");
+      await page.locator('.sidebar .nav-item[data-page="profil"]').evaluate(el => el.click());
+      const columns = await page.locator(".profile-detail-grid").evaluate(el => getComputedStyle(el).gridTemplateColumns.split(" ").length);
+      assert.equal(columns, 1, "Profile must use one column on mobile");
+      assert.equal(await page.locator(".profile-logout").isVisible(), false, "Header logout must be hidden on mobile");
+      const menuToggle = page.locator(".mobile-nav-toggle");
+      await menuToggle.click();
+      const drawerLogout = page.locator(".sidebar .mobile-logout");
+      assert(await drawerLogout.isVisible(), "Drawer logout must be visible");
+      await drawerLogout.click();
+      const confirm = page.locator(".logout-dialog-layer");
+      assert(await confirm.isVisible(), "Logout confirmation must open");
+      await page.locator('[data-action="logout-cancel"]').click();
+      assert.equal(await confirm.isVisible(), false, "Cancellation must close confirmation");
+      assert.equal(await page.locator(".login-screen").isVisible(), false, "Cancel must preserve login session");
+      await drawerLogout.click();
+      await page.locator('[data-action="logout-accept"]').click();
+      assert(await page.locator(".login-screen").isVisible(), "Confirmed logout must open login");
+      assert.deepEqual(pageErrors, [], "No JS exceptions");
+    } finally { await context.close(); }
+  });
 } finally {
   await browser.close();
 }
