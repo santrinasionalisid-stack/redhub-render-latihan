@@ -1,6 +1,9 @@
 name: REDHUB UI smoke tests and visual capture
 
 on:
+  push:
+    branches:
+      - fix/v16-1-mobile-visual-audit
   workflow_dispatch:
     inputs:
       base_url:
@@ -31,15 +34,22 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Start branch preview server
+        if: github.event_name == 'push'
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/redhub-preview.log 2>&1 &
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8765/ >/dev/null && exit 0; sleep 1; done
+          exit 1
+
       - name: Test deployed UI
         env:
-          BASE_URL: ${{ inputs.base_url }}
+          BASE_URL: ${{ github.event_name == 'push' && 'http://127.0.0.1:8765' || inputs.base_url }}
         run: node tests/ui-smoke.mjs
 
       - name: Capture desktop and mobile screenshots
         if: always()
         env:
-          BASE_URL: ${{ inputs.base_url }}
+          BASE_URL: ${{ github.event_name == 'push' && 'http://127.0.0.1:8765' || inputs.base_url }}
         run: node tests/ui-screenshots.mjs
 
       - name: Upload visual audit screenshots
