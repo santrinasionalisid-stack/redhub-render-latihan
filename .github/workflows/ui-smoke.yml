@@ -9,6 +9,7 @@ on:
       - fix/v16-4-pengurus-hero-logo
       - feat/v16-5-unified-mobile-qr
       - fix/v16-6-premium-mobile-login
+      - fix/v16-7-clean-mobile-login
   workflow_dispatch:
     inputs:
       base_url:
