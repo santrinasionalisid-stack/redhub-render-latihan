@@ -614,7 +614,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
       else link.removeAttribute("aria-current");
     });
     setHeader(route);
-    if (window.matchMedia("(max-width: 900px)").matches) body.classList.remove("mobile-nav-open");
+    if (window.matchMedia("(max-width: 900px)").matches) { body.classList.remove("mobile-nav-open"); sidebar.style.removeProperty("transform"); }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
   function login(role) {
@@ -739,6 +739,8 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
   topbar.insertBefore(mobileToggle, topbar.firstChild);
   mobileToggle.addEventListener("click", function () {
     const opened = body.classList.toggle("mobile-nav-open");
+    if (opened) sidebar.style.setProperty("transform", "translateX(0)", "important");
+    else sidebar.style.removeProperty("transform");
     mobileToggle.setAttribute("aria-expanded", String(opened));
     mobileToggle.setAttribute("aria-label", opened ? "Tutup navigasi" : "Buka navigasi");
   });
@@ -746,6 +748,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     if (!body.classList.contains("mobile-nav-open")) return;
     if (event.target.closest(".sidebar") || event.target.closest(".mobile-nav-toggle")) return;
     body.classList.remove("mobile-nav-open");
+    sidebar.style.removeProperty("transform");
     mobileToggle.setAttribute("aria-expanded", "false");
     mobileToggle.setAttribute("aria-label", "Buka navigasi");
   });
