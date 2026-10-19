@@ -1932,3 +1932,16 @@ input::placeholder, textarea::placeholder {
   .workspace { padding-top: 9px; }
   .topbar { gap: 7px; margin-bottom: 16px; }
 }
+
+/* V16.3 — mobile viewport containment, without disabling accessible zoom. */
+@media (max-width: 900px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: clip; }
+  .workspace, .topbar, .page-heading, .generated-page, .generated-panel { min-width: 0; max-width: 100%; }
+  .workspace { overflow-wrap: break-word; }
+  .table-wrap, .generated-table-wrap { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+  input, select, textarea { max-width: 100%; }
+}
+@media (max-width: 600px) {
+  /* iOS Safari does not focus-zoom form fields at 16px or larger. */
+  input, select, textarea { font-size: 16px; }
+}
