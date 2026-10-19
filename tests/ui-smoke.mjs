@@ -256,6 +256,11 @@ try {
       await menuToggle.click();
       const drawerLogout = page.locator(".sidebar .mobile-logout");
       assert(await drawerLogout.isVisible(), "Drawer logout must be visible");
+      console.log("LOGOUT_GEOMETRY", JSON.stringify(await page.evaluate(() => {
+        const sidebar=document.querySelector(".sidebar"), button=document.querySelector(".mobile-logout");
+        const s=sidebar.getBoundingClientRect(), b=button.getBoundingClientRect();
+        return {isOpen:document.body.classList.contains("mobile-nav-open"),sidebar:{x:s.x,y:s.y,width:s.width,height:s.height},button:{x:b.x,y:b.y,width:b.width,height:b.height}, viewport:{w:innerWidth,h:innerHeight}};
+      })));
       await drawerLogout.click();
       const confirm = page.locator(".logout-dialog-layer");
       assert(await confirm.isVisible(), "Logout confirmation must open");
