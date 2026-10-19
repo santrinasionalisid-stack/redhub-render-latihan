@@ -513,7 +513,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
       ]));
     }
     if (route === "profil") {
-      return panel("Profil saya", "Informasi akun dan jabatan aktif.", '<div class="profile-detail-grid"><div class="profile-detail-avatar">AP</div><div><span class="stat-label">NAMA LENGKAP</span><h3>Andi Pratama</h3><p class="subtitle">Nomor anggota RH-MBR-0001</p></div><div><span class="stat-label">UNIT ORGANISASI</span><strong>DPC Jember</strong></div><div><span class="stat-label">JABATAN AKTIF</span><strong>Sekretaris</strong></div><div><span class="stat-label">PERIODE</span><strong>2025–2030</strong></div><div><span class="stat-label">STATUS AKUN</span>' + statusBadge("Aktif") + '</div></div>');
+      return panel("Profil saya", "Informasi akun dan jabatan aktif.", '<div class="profile-detail-grid"><div class="profile-identity"><div class="profile-detail-avatar">AP</div><div class="profile-identity-copy"><span class="stat-label">IDENTITAS PENGURUS</span><h3>Andi Pratama</h3><p class="subtitle">Sekretaris · DPC Jember</p></div></div><div class="profile-detail-name"><span class="stat-label">NAMA LENGKAP</span><h3>Andi Pratama</h3><p class="subtitle">Nomor anggota RH-MBR-0001</p></div><div><span class="stat-label">UNIT ORGANISASI</span><strong>DPC Jember</strong></div><div><span class="stat-label">JABATAN AKTIF</span><strong>Sekretaris</strong></div><div><span class="stat-label">PERIODE</span><strong>2025–2030</strong></div><div><span class="stat-label">STATUS AKUN</span>' + statusBadge("Aktif") + '</div></div>');
     }
     return "";
   }
