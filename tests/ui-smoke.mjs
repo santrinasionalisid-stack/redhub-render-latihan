@@ -102,6 +102,12 @@ try {
       // Tap a real viewport coordinate outside the open drawer. Clicking main at
       // (10, 10) can target the covered area underneath the sidebar and time out.
       const viewport = page.viewportSize();
+      const navItems = page.locator(".sidebar .nav-item");
+      const first = await navItems.nth(0).boundingBox();
+      const second = await navItems.nth(1).boundingBox();
+      assert(first && second, "First two navigation items must be measurable");
+      assert(second.y >= first.y + first.height, "Mobile navigation must stack vertically");
+      assert(Math.abs(first.x - second.x) <= 2, "Mobile navigation items must align to one column");
       const sidebarBounds = await page.locator(".sidebar").boundingBox();
       assert(sidebarBounds, "Sidebar must be visible when the mobile navigation is open");
       const outsideX = Math.min(
