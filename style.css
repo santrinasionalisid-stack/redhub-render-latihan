@@ -1886,6 +1886,20 @@ input::placeholder, textarea::placeholder {
 }
 
 
+/* V16.1 — the <=720px legacy sidebar must not occupy normal document flow. */
+@media (max-width: 900px) {
+  .sidebar { position: fixed; inset: 0 auto 0 0; }
+}
+
+/* V16.1 — minimum readable mobile metadata without changing card geometry. */
+@media (max-width: 600px) {
+  .stat-label { font-size: 10px; letter-spacing: .2px; }
+  .stat-foot small { font-size: 10px; line-height: 1.45; }
+  .page-heading .eyebrow { font-size: 10px; }
+  .section-kicker { font-size: 10px; }
+  .brand-stage-tags span { font-size: 10px; }
+}
+
 /* V16 — tighter mobile dashboard rhythm and cleaner first viewport. */
 @media (max-width: 600px) {
   .workspace { padding-top: 10px; }
