@@ -544,6 +544,15 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     navList.innerHTML = navByRole[currentRole].map(function (item) {
       return '<a class="nav-item" href="#" data-page="' + item[0] + '">' + svgIcon(item[2]) + '<span>' + item[1] + '</span></a>';
     }).join("");
+    let mobileLogout = sidebar.querySelector(".mobile-logout");
+    if (!mobileLogout) {
+      mobileLogout = document.createElement("button");
+      mobileLogout.type = "button";
+      mobileLogout.className = "mobile-logout";
+      mobileLogout.dataset.action = "logout-confirm";
+      mobileLogout.textContent = "Keluar dari Akun";
+      sidebar.appendChild(mobileLogout);
+    }
     const bottom = document.querySelector(".sidebar-bottom");
     if (bottom) {
       const card = bottom.querySelector(".workspace-card");
@@ -610,6 +619,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
   }
   function login(role) {
     currentRole = role;
+    body.dataset.role = role;
     try { localStorage.setItem(ROLE_KEY, role); } catch (error) {}
     body.classList.remove("auth-required");
     loginScreen.hidden = true;
@@ -629,6 +639,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
   document.addEventListener("keydown", function (event) { if (event.key === "Escape" && !logoutDialog.hidden) closeLogoutConfirm(); });
   function logout() {
     currentRole = null;
+    delete body.dataset.role;
     try { localStorage.removeItem(ROLE_KEY); } catch (error) {}
     showLogin();
     window.scrollTo({ top: 0, behavior: "smooth" });
