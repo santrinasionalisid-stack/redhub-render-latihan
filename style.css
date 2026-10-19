@@ -2127,3 +2127,7 @@ input::placeholder, textarea::placeholder {
   .sidebar .nav-list { overflow-y: auto; max-height: calc(100dvh - 245px); }
   .sidebar .mobile-logout { position: absolute; left: 14px; right: 14px; bottom: 16px; width: calc(100% - 28px); margin: 0; }
 }
+
+@media (max-width: 900px) {
+  body.mobile-nav-open .sidebar { transform: translateX(0) !important; }
+}
