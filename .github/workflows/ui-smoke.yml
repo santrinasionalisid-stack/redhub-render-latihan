@@ -6,6 +6,7 @@ on:
       - fix/v16-1-mobile-visual-audit
       - fix/v16-2-mobile-vertical-navigation
       - fix/v16-3-mobile-responsive
+      - fix/v16-4-pengurus-hero-logo
   workflow_dispatch:
     inputs:
       base_url:
