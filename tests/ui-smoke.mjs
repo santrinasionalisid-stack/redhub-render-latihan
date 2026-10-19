@@ -112,6 +112,7 @@ try {
       await signIn(page, "superadmin@redhub.demo");
       const toggle = page.locator(".mobile-nav-toggle");
       await toggle.click();
+      await page.waitForTimeout(350); // Allow drawer animation to finish before measuring the outside tap target.
       assert.equal(await page.locator("body").evaluate(el => el.classList.contains("mobile-nav-open")), true);
       assert.equal(await toggle.getAttribute("aria-expanded"), "true");
       // Tap a real viewport coordinate outside the open drawer. Clicking main at
