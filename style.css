@@ -1886,6 +1886,11 @@ input::placeholder, textarea::placeholder {
 }
 
 
+/* V16.1 — the <=720px legacy sidebar must not occupy normal document flow. */
+@media (max-width: 900px) {
+  .sidebar { position: fixed; inset: 0 auto 0 0; }
+}
+
 /* V16.1 — minimum readable mobile metadata without changing card geometry. */
 @media (max-width: 600px) {
   .stat-label { font-size: 10px; letter-spacing: .2px; }
