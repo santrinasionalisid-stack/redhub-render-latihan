@@ -11,6 +11,7 @@ on:
       - fix/v16-6-premium-mobile-login
       - fix/v16-7-clean-mobile-login
       - fix/v16-8-mobile-polish
+      - fix/v16-9-mobile-profile-drawer
   workflow_dispatch:
     inputs:
       base_url:
