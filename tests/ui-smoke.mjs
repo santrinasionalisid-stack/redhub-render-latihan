@@ -203,6 +203,36 @@ try {
       } finally { await context.close(); }
     }
   });
+  await check("V16.7 minimal login eye toggle and first-screen footer", async () => {
+    for (const [width, height] of [[320, 667], [390, 844], [430, 932], [768, 1024]]) {
+      const { context, page, pageErrors } = await freshPage({ width, height });
+      try {
+        const eye = page.locator(".password-visibility");
+        const pass = page.locator("#loginPassword");
+        assert.equal(await eye.count(), 1, "Password eye must exist");
+        await pass.fill("Demo123!");
+        await eye.click();
+        assert.equal(await pass.getAttribute("type"), "text");
+        assert.equal(await eye.getAttribute("aria-pressed"), "true");
+        await eye.click();
+        assert.equal(await pass.getAttribute("type"), "password");
+        const geometry = await page.evaluate(() => {
+          const shell = document.querySelector(".login-shell");
+          const footer = document.querySelector(".login-copyright");
+          const brand = document.querySelector(".login-brand");
+          return { footerBottom: footer.getBoundingClientRect().bottom,
+            brandBottom: brand.getBoundingClientRect().bottom,
+            shellBottom: shell.getBoundingClientRect().bottom,
+            viewportHeight: innerHeight,
+            pageWidth: document.documentElement.scrollWidth,
+            viewportWidth: document.documentElement.clientWidth };
+        });
+        assert(geometry.footerBottom <= height + 1, `Footer not visible at ${width}x${height}: ${JSON.stringify(geometry)}`);
+        assert(geometry.pageWidth <= geometry.viewportWidth + 1, "Login overflow");
+        assert.deepEqual(pageErrors, []);
+      } finally { await context.close(); }
+    }
+  });
 } finally {
   await browser.close();
 }
