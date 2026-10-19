@@ -682,7 +682,7 @@ exportCsvButton.addEventListener("click", exportMembersCsv);
     if (action === "new-unit") { toast("Penambahan unit belum tersedia dari halaman ini."); return; }
     if (action === "new-meeting") { toast("Pembuatan rapat belum tersedia dari halaman ini."); return; }
     if (action === "meeting-detail") { toast("Detail agenda belum tersedia di halaman ini."); return; }
-    if (action === "detail-struktur") { toast("Detail unit organisasi demo."); return; }
+    if (action === "detail-struktur") { toast("Detail unit organisasi belum tersedia di halaman ini."); return; }
     if (action === "new-admin") { toast("Pembuatan akun administratif belum tersedia dari halaman ini."); return; }
     if (action === "admin-detail") { toast("Pengelolaan akun belum tersedia dari halaman ini."); return; }
     if (action === "save-settings") { toast("Perubahan preferensi belum dapat disimpan ke server.", "success"); return; }
